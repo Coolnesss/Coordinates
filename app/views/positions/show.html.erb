@@ -1,13 +1,13 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>X:</strong>
-  <%= @position.x %>
+  <strong>Longitude:</strong>
+  <%= @position.lon %>
 </p>
 
 <p>
-  <strong>Y:</strong>
-  <%= @position.y %>
+  <strong>Latitude:</strong>
+  <%= @position.lat %>
 </p>
 
 <p>
@@ -18,6 +18,11 @@
 <p>
   <strong>Description:</strong>
   <%= @position.description %>
+</p>
+
+<p>
+  <strong>Votes:</strong>
+  <%= @position.votes %>
 </p>
 
 <%= link_to 'Edit', edit_position_path(@position) %> |

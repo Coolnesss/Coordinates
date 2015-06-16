@@ -54,9 +54,10 @@ class PositionsController < ApplicationController
 
     respond_to do |format|
       if @position.save
-        format.html { redirect_to @position, notice: 'Position was successfully created.' }
+        format.html { redirect_to :back, notice: 'Position was successfully created.' }
         format.json { render :show, status: :created, location: @position }
       else
+        redirect_to :back
         format.html { render :new }
         format.json { render json: @position.errors, status: :unprocessable_entity }
       end
@@ -95,6 +96,6 @@ class PositionsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def position_params
-      params.require(:position).permit(:x, :y, :name, :description)
+      params.require(:position).permit(:lon, :lat, :name, :description)
     end
 end
