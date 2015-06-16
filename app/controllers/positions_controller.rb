@@ -5,6 +5,25 @@ class PositionsController < ApplicationController
   # GET /positions.json
   def index
     @positions = Position.all
+    @geojson = Array.new
+
+    @positions.each do |position|
+      @geojson << {
+        type: 'Feature',
+        geometry: {
+          type: 'Point',
+          coordinates: [position.x, position.y]
+        },
+        properties: {
+          name: position.name,
+          description: position.description
+        }
+      }
+    end
+    respond_to do |format|
+      format.html
+      format.json { render json: @geojson }  # respond with the created JSON object
+    end
   end
 
   # GET /positions/1
