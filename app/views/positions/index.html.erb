@@ -5,10 +5,11 @@
 <table>
   <thead>
     <tr>
-      <th>X</th>
-      <th>Y</th>
+      <th>Longitude</th>
+      <th>Latitude</th>
       <th>Name</th>
       <th>Description</th>
+      <th>Votes</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -16,10 +17,11 @@
   <tbody>
     <% @positions.each do |position| %>
       <tr>
-        <td><%= position.x %></td>
-        <td><%= position.y %></td>
+        <td><%= position.lon %></td>
+        <td><%= position.lat %></td>
         <td><%= position.name %></td>
         <td><%= position.description %></td>
+        <td><%= position.votes %></td>
         <td><%= link_to 'Show', position %></td>
         <td><%= link_to 'Edit', edit_position_path(position) %></td>
         <td><%= link_to 'Destroy', position, method: :delete, data: { confirm: 'Are you sure?' } %></td>

@@ -11,15 +11,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150616180647) do
+ActiveRecord::Schema.define(version: 20150616201108) do
 
   create_table "positions", force: :cascade do |t|
-    t.float    "x"
-    t.float    "y"
+    t.float    "lon"
+    t.float    "lat"
     t.string   "name"
     t.text     "description"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+    t.integer  "votes"
   end
 
 end

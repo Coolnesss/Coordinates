@@ -1,5 +1,10 @@
 class PositionsController < ApplicationController
-  before_action :set_position, only: [:show, :edit, :update, :destroy]
+  before_action :set_position, only: [:show, :edit, :update, :destroy, :vote]
+
+  def vote
+    @position.increment!(:votes)
+    redirect_to root_path
+  end
 
   # GET /positions
   # GET /positions.json
@@ -12,11 +17,13 @@ class PositionsController < ApplicationController
         type: 'Feature',
         geometry: {
           type: 'Point',
-          coordinates: [position.x, position.y]
+          coordinates: [position.lon, position.lat]
         },
         properties: {
+          id: position.id,
           name: position.name,
-          description: position.description
+          description: position.description,
+          votes: position.votes
         }
       }
     end
