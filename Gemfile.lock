@@ -87,6 +87,7 @@ GEM
       railties (>= 3.1)
     pg (0.18.1)
     rack (1.6.2)
+    rack-cors (0.3.1)
     rack-jsonp-middleware (0.0.10)
       rack
     rack-test (0.6.3)
@@ -168,6 +169,7 @@ DEPENDENCIES
   jquery-turbolinks
   openlayers-rails
   pg
+  rack-cors
   rack-jsonp-middleware
   rails (= 4.2.0)
   rails_12factor
