@@ -6,6 +6,9 @@ class PositionsController < ApplicationController
     redirect_to root_path
   end
 
+  def map
+  end
+
   # GET /positions
   # GET /positions.json
   def index
@@ -54,10 +57,9 @@ class PositionsController < ApplicationController
 
     respond_to do |format|
       if @position.save
-        format.html { redirect_to :back, notice: 'Position was successfully created.' }
+        format.html { redirect_to @position, notice: 'Position was successfully created.' }
         format.json { render :show, status: :created, location: @position }
       else
-        redirect_to :back
         format.html { render :new }
         format.json { render json: @position.errors, status: :unprocessable_entity }
       end
