@@ -15,8 +15,13 @@ class PositionsController < ApplicationController
     @positions = Position.all
     @geojson = Array.new
 
+    @points = Array.new
+    @geojson << {
+        type: 'FeatureCollection',
+        features: @points
+      }
     @positions.each do |position|
-      @geojson << {
+      @points << {
         type: 'Feature',
         geometry: {
           type: 'Point',
@@ -29,6 +34,8 @@ class PositionsController < ApplicationController
           votes: position.votes
         }
       }
+
+
     end
     respond_to do |format|
       format.html
