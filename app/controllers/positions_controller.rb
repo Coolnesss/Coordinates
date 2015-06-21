@@ -3,7 +3,10 @@ class PositionsController < ApplicationController
 
   def vote
     @position.increment!(:votes)
-    redirect_to root_path
+    respond_to do |format|
+      format.html { redirect_to root_path }
+      format.json { render json: @position.votes }
+    end
   end
 
   def map
