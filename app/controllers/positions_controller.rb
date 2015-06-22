@@ -9,9 +9,6 @@ class PositionsController < ApplicationController
     end
   end
 
-  def map
-  end
-
   # GET /positions
   # GET /positions.json
   def index
