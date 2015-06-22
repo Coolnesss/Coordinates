@@ -1,6 +1,16 @@
 language: ruby
-
 rvm:
- - 2.2.0
-
+- 2.2.0
+script:
+- bundle exec rake db:migrate --trace
+- RAILS_ENV=test bundle exec rake db:migrate --trace
+- bundle exec rake db:test:prepare
+- bundle exec rspec -fd spec/
 sudo: false
+deploy:
+  provider: heroku
+  api_key:
+    secure: fg5eJO7ZdddF9xaMyM0/no3chFEDbLkS2r6b+ENIPuAAc5FxHRda72+8aYcyqFcIF0YK39AtdthDDTgHspDZn8RXnC84T2JKK1V6lEFfVVU2sDrD0RsuJ9AnOZeNpYEEOG5wuLzWyFS7ZlKkyxllD/NfIN2rE7msNYiz1V40bsjluqr3hojsH4NNgOzhs+Pn458nk4PjiS4cbQnOVIYgSgYSmLHMrymkRIsVk0ivoS2NdMWVdsfR1j7wUT31mAU/HXoXMs0nKjxFXsRbO4dBd+atRzXAajyZGMEFac8VNIGbQ0IXL2JrlvfhwUx2GWnro6D3ioMQmKzKd1dRtvK/jBk3UTUrbdDUd0wmrGrkv8FxPX3/bsFb6QgCxZBVQH/U+axj9u44iSkaO3J7gOyp+CRMN4+5/v3ONDjU3ZgSzDjHI005YTDqLBKBjNzgBXlLH3HIwTTVEPYLIOdx1bodViRe4Uj7npzP9+ptvdy17tG7NjJhqegMDPG9so7QkBsJsVFxGT+j4OuVh+0PkjUdki9JOIx1zOIBuBFjfdUxOFYuQHd6zdz3g+IYLfexea7r7dCRA9cwECoh22k2woIPNttR6YQfopAq1Zs+wO6C4BLryFjUicAl4rbuzgNZzH52HyzeFJTcoFAavxwGT/veAk3/xgFk21JZglE4i9Qe2Dg=
+  app: pointmap
+  on:
+    repo: Coolnesss/Coordinates
