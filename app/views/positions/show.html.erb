@@ -25,5 +25,8 @@
   <%= @position.votes %>
 </p>
 
+<%= image_tag @position.image.url(:thumb) %>
+
+
 <%= link_to 'Edit', edit_position_path(@position) %> |
 <%= link_to 'Back', positions_path %>

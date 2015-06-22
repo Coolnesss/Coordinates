@@ -27,6 +27,7 @@ gem 'bootstrap-sass', '~> 3.3.5'
 gem 'jquery-turbolinks'
 gem 'openlayers-rails'
 gem 'paperclip'
+gem 'aws-sdk'
 
 gem 'rack-jsonp-middleware',
   :require => 'rack/jsonp'

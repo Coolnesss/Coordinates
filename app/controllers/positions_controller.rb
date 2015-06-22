@@ -36,6 +36,7 @@ class PositionsController < ApplicationController
           description: position.description,
           votes: position.votes,
           date: position.date_format
+          image: position.image.url
         }
       }
 
@@ -109,6 +110,6 @@ class PositionsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def position_params
-      params.require(:position).permit(:lon, :lat, :name, :description)
+      params.require(:position).permit(:lon, :lat, :name, :description, :image)
     end
 end

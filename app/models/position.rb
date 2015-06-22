@@ -1,12 +1,7 @@
 class Position < ActiveRecord::Base
-  #validates :x, presence: true, numericality: true, format: {
-  #  with: /\A[-+]?([1-8]?\d(\.\d+)?|90(\.0+)?)\z/,
-  #  message: "Not a real coordinate"
-  #}
-  #validates :y, presence: true, numericality: true, format: {
-  #  with: /\A\s*[-+]?(180(\.0+)?|((1[0-7]\d)|([1-9]?\d))(\.\d+)?)\z/,
-  #  message: "Not a real coordinate"
-  #}
+
+  has_attached_file :image, :styles => { :medium => "300x300>", :thumb => "85x85>" }, :default_url => "/images/missing.png"
+  validates_attachment_content_type :image, :content_type => /\Aimage\/.*\Z/
 
   def date_format
     date = self.created_at
