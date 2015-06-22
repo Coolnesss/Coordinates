@@ -34,7 +34,8 @@ class PositionsController < ApplicationController
           id: position.id,
           name: position.name,
           description: position.description,
-          votes: position.votes
+          votes: position.votes,
+          date: position.date_format
         }
       }
 
