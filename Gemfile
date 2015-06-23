@@ -47,6 +47,7 @@ group :production do
   gem 'pg'
   gem 'rails_12factor'
 end
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
@@ -56,9 +57,18 @@ group :development, :test do
 
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
-
   gem 'sqlite3'
+  gem "better_errors"
+  gem 'rspec-rails', '~> 3.0'
+end
 
-  gem 'rspec'
-
+group :test do
+  gem 'factory_girl_rails'
+  gem 'capybara'
+  gem 'launchy'
+  gem 'simplecov', require: false
+  gem 'rspec-its'
+  gem 'webmock'
+  gem 'selenium-webdriver'
+  gem 'database_cleaner'
 end
