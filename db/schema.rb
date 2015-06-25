@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150622135350) do
+ActiveRecord::Schema.define(version: 20150625135523) do
 
   create_table "positions", force: :cascade do |t|
     t.float    "lon"
@@ -25,6 +25,14 @@ ActiveRecord::Schema.define(version: 20150622135350) do
     t.string   "image_content_type"
     t.integer  "image_file_size"
     t.datetime "image_updated_at"
+  end
+
+  create_table "reports", force: :cascade do |t|
+    t.string   "email"
+    t.text     "description"
+    t.string   "cause"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
   end
 
 end

@@ -1,0 +1,21 @@
+<h1>Listing Reports</h1>
+
+  <div class="container-fluid">
+    <% @reports.each do |report| %>
+      <div class="col-sm-4">
+        <div class="panel panel-primary">
+          <div class="panel-heading clickable">
+            <h3 class="panel-title"><strong style="color:white">
+              <strong><%= link_to report.cause, report, style:'color:#161616' %> by <%= report.email %></strong></h3>
+          </div>
+          <div class="panel-body">
+            <%= link_to report.description, report, style:'color:black' %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+
+<br>
+
+<%= link_to 'New Report', new_report_path %>

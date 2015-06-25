@@ -28,6 +28,7 @@ gem 'jquery-turbolinks'
 gem 'openlayers-rails'
 gem 'paperclip'
 gem 'aws-sdk', '< 2.0'
+gem 'email_validator'
 
 gem 'rack-jsonp-middleware',
   :require => 'rack/jsonp'

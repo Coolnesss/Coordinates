@@ -6,4 +6,10 @@ FactoryGirl.define do
     lat 8435571.22109427
     votes 0
   end
+
+  factory :report do
+    cause "Useless"
+    description "This site sucks"
+    email "sam@random.com"
+  end
 end
