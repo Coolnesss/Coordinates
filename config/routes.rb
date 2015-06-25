@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   root 'positions#index'
   get 'positions/:id/vote' => 'positions#vote'
   get 'map' => 'positions#map'
+  get 'reports/:id/ignore' => 'reports#ignore', :as => 'ignore_report'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

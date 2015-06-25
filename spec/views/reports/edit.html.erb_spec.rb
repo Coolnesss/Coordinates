@@ -2,11 +2,7 @@ require 'rails_helper'
 
 RSpec.describe "reports/edit", :type => :view do
   before(:each) do
-    @report = assign(:report, Report.create!(
-      :email => "real@email.com",
-      :description => "MyText",
-      :cause => "MyString"
-    ))
+    @report = FactoryGirl.create(:report)
   end
 
   it "renders the edit report form" do

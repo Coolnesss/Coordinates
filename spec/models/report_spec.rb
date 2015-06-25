@@ -16,4 +16,13 @@ describe Report do
     report = Report.create(cause: "legit", description: "real")
     expect(report).not_to be_valid
   end
+
+  it "Cannot save a report without a position" do
+    report = Report.create(
+      cause: "legit",
+      description: "real",
+      email:"real@real.fi",
+    )
+    expect(report).not_to be_valid
+  end
 end

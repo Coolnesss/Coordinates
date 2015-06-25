@@ -7,6 +7,12 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
+  <ul class="nav nav-tabs">
+    <li role="presentation"><%= link_to 'Positions', positions_path %></li>
+    <li role="presentation"><%= link_to 'Reports', reports_path %></li>
+  </ul>
+
+
 
 <%= yield %>
 

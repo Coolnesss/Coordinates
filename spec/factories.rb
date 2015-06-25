@@ -11,5 +11,7 @@ FactoryGirl.define do
     cause "Useless"
     description "This site sucks"
     email "sam@random.com"
+    ignored false
+    position
   end
 end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150625135523) do
+ActiveRecord::Schema.define(version: 20150625150702) do
 
   create_table "positions", force: :cascade do |t|
     t.float    "lon"
@@ -33,6 +33,8 @@ ActiveRecord::Schema.define(version: 20150625135523) do
     t.string   "cause"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+    t.boolean  "ignored"
+    t.integer  "position_id"
   end
 
 end

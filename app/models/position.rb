@@ -1,6 +1,8 @@
 class Position < ActiveRecord::Base
-  validates :name, :description, :lon, :lat, presence: true
 
+  has_many :reports
+
+  validates :name, :description, :lon, :lat, presence: true
   validates :name, length: { maximum: 20 }
   validates :description, length: { maximum: 340 }
   validates_numericality_of :lon
