@@ -34,7 +34,6 @@ class PositionsController < ApplicationController
           votes: position.votes,
           date: position.date_format,
           image: position.image.url,
-          email: position.email
         }
       }
 
