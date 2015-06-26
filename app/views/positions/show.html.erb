@@ -1,29 +1,28 @@
-<p>
-  <strong>Longitude:</strong>
-  <%= @position.lon %>
-</p>
 
-<p>
-  <strong>Latitude:</strong>
-  <%= @position.lat %>
-</p>
+<br>
+<div class="row">
+  <div class="col-md-8 col-md-offset-2">
+    <h1><%= @position.name %></h1>
+    <div class="row">
+    <h4 class="text-center">
+      Longitude <span class="label label-primary">
+        <%= @position.lon %></span>
+      Latitude <span class="label label-primary">
+        <%= @position.lat %></span>
+      Votes <span class="label label-success">
+        <%= @position.votes %></span>
+    </h4>
+    </div>
+    <h4>Description</h4>
+    <div class="well">
+      <%= @position.description %>
+    </div>
+  </div>
+</div>
 
-<p>
-  <strong>Name:</strong>
-  <%= @position.name %>
-</p>
-
-<p>
-  <strong>Description:</strong>
-  <%= @position.description %>
-</p>
-
-<p>
-  <strong>Votes:</strong>
-  <%= @position.votes %>
-</p>
-
-<%= image_tag @position.image.url(:thumb) %>
+<% if not @position.image.url == "null" %>
+  <p><%= image_tag @position.image.url(:thumb) %></p>
+<% end %>
 
 
 <%= link_to 'Edit', edit_position_path(@position) %> |

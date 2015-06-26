@@ -33,7 +33,7 @@ class PositionsController < ApplicationController
           description: position.description,
           votes: position.votes,
           date: position.date_format,
-          image: position.image.url,
+          image: position.image.url
         }
       }
 
