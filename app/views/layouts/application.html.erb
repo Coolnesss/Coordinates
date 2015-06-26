@@ -8,12 +8,15 @@
 </head>
 <body>
   <ul class="nav nav-tabs">
-    <li role="presentation"><%= link_to 'Positions', positions_path %></li>
-    <li role="presentation"><%= link_to 'Reports', reports_path %></li>
+    <li><%= link_to "<i class='fa fa-map-marker fa-fw'></i> Positions".html_safe, positions_path %></li>
+    <% if current_user %>
+      <li><%= link_to "<i class='fa fa-flag fa-fw'></i> Reports".html_safe, reports_path %></li>
+      <li class="nav navbar-right"><%= link_to "<i class='fa fa-sign-out fa-fw'></i> Sign out".html_safe, signout_path, method: :delete %></li>
+    <% else %>
+      <li class="nav navbar-right"><%= link_to "<i class='fa fa-sign-in fa-fw'></i> Sign in".html_safe, signin_path %></li>
+    <% end %>
   </ul>
-
-
-
+  <%= flash_messages %>
 <%= yield %>
 
 </body>

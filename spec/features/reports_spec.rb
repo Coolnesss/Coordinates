@@ -2,6 +2,11 @@ require 'rails_helper'
 
 describe "Report" do
 
+  before :each do
+    user = FactoryGirl.create(:user)
+    sign_in(username:"Sam", password:"Samisbest")
+  end
+
   it "can ignore created report" do
     FactoryGirl.create(:report)
     visit reports_path

@@ -2,6 +2,7 @@ class Position < ActiveRecord::Base
 
   has_many :reports
 
+  validates :email, :email => true
   validates :name, :description, :lon, :lat, presence: true
   validates :name, length: { maximum: 20 }
   validates :description, length: { maximum: 340 }

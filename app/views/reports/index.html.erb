@@ -2,12 +2,13 @@
 
   <div class="row">
     <div class="col-md-8 col-md-offset-2">
-      <table class="table">
+      <table class="table table-hover">
         <thead>
           <tr>
             <th>Cause</th>
             <th>Position</th>
-            <th>Email</th>
+            <th>Email (reporter)</th>
+            <th>Email (position)</th>
             <th>Description</th>
             <th>Options</th>
           </tr>
@@ -19,6 +20,7 @@
             <td><%= report.cause %></td>
             <td><%= link_to report.position.name, report.position, class: "btn btn-xs btn-primary" %></td>
             <td><%= report.email %></td>
+            <td><%= report.position.email %></td>
             <td><%= report.description %></td>
             <td><%= link_to 'Ignore', ignore_report_path(report), class: "btn btn-xs btn-danger" %></td>
           </tr>

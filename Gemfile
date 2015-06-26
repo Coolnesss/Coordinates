@@ -29,6 +29,8 @@ gem 'openlayers-rails'
 gem 'paperclip'
 gem 'aws-sdk', '< 2.0'
 gem 'email_validator'
+gem 'bcrypt'
+gem "font-awesome-rails"
 
 gem 'rack-jsonp-middleware',
   :require => 'rack/jsonp'

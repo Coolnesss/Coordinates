@@ -58,6 +58,7 @@ describe "Positions API" do
           :description => "bar",
           :lon => "asd",
           :lat => "asd",
+          :email => "lol@chang.fi"
         }
       }
       post "/positions.json", json
@@ -72,6 +73,7 @@ describe "Positions API" do
           :description => "bar",
           :lon => 123,
           :lat => 123,
+          :email => "lol@chang.fi"
         }
       }
       post "/positions.json", json
@@ -97,7 +99,8 @@ describe "Positions API" do
           :name => "reallylongsuperlongamericalongname",
           :description => "s",
           :lon => 1,
-          :lat => 1
+          :lat => 1,
+          :email => "lol@chang.fi"
         }
       }
       post "/positions.json", json
@@ -106,8 +109,7 @@ describe "Positions API" do
     end
 
     it "saves a position with a picture" do
-
+      #TODO
     end
-
   end
 end
