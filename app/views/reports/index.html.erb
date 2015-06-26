@@ -16,7 +16,7 @@
 
         <tbody>
           <% @reports.each do |report| %>
-          <tr>
+          <tr style="background-color:<%= cause_color(report.cause) %>">
             <td><%= report.cause %></td>
             <td><%= link_to report.position.name, report.position, class: "btn btn-xs btn-primary" %></td>
             <td><%= report.email %></td>
