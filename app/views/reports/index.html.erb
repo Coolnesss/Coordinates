@@ -16,8 +16,8 @@
 
         <tbody>
           <% @reports.each do |report| %>
-          <tr style="background-color:<%= cause_color(report.cause) %>">
-            <td><%= report.cause %></td>
+          <tr>
+            <td><span class="label label-<%= cause_label(report.cause) %>"><%= report.cause.capitalize %></span></td>
             <td><%= link_to report.position.name, report.position, class: "btn btn-xs btn-primary" %></td>
             <td><%= report.email %></td>
             <td><%= report.position.email %></td>

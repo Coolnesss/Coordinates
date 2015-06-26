@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :null_session
 
-  helper_method :current_user, :cause_color
+  helper_method :current_user, :cause_color, :cause_label
 
   def current_user
     return nil if session[:user_id].nil? or User.all.find_by(id:session[:user_id]).nil?
@@ -15,7 +15,13 @@ class ApplicationController < ActionController::Base
   end
 
   def cause_color(cause)
-    colors = {"fixed" => "rgb(157, 136, 255)", "spam" => "rgb(157, 136, 255)", "other" => "rgb(243, 255, 136)"}
+    colors = {"fixed" => "rgba(157, 136, 255, .3)", "spam" => "rgba(157, 136, 255, .3)", "other" => "rgba(243, 255, 136, .3)"}
+    colors[cause.downcase]
+  end
+
+  def cause_label(cause)
+    colors = {"fixed" => "success", "spam" => "danger", "other" => "info"}
+    if (not colors.has_key?(cause.downcase)) then return "default" end
     colors[cause.downcase]
   end
 end
