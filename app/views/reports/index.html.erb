@@ -22,8 +22,8 @@
           <td><%= report.email %></td>
           <td><%= report.position.email %></td>
           <td><%= report.description %></td>
-          <td><%= link_to 'Ignore', ignore_report_path(report), class: "btn btn-xs btn-danger" %></td>
-          <td><%= link_to 'Remove position', report.position, method: :delete, class: "btn btn-xs btn-danger" %></td>
+          <td><%= link_to 'Ignore', ignore_report_path(report), class: "btn btn-xs btn-danger", data: { confirm: "Are you sure?" }  %>
+              <%= link_to 'Remove position', report.position, method: :delete, class: "btn btn-xs btn-danger", data: { confirm: "Are you sure?" }  %></td>
         </tr>
         <% end %>
       </tbody>
