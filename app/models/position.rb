@@ -1,6 +1,6 @@
 class Position < ActiveRecord::Base
 
-  has_many :reports
+  has_many :reports, dependent: :destroy
 
   validates :email, :email => true
   validates :name, :description, :lon, :lat, presence: true

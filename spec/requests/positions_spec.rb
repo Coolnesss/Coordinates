@@ -27,9 +27,10 @@ describe "Positions API" do
       get "/positions", {}, { "Accept" => "application/json" }
 
       body = JSON.parse(response.body).to_s
-      expect(body).to include(Date.today.day.to_s)
-      expect(body).to include(Date.today.month.to_s)
-      expect(body).to include(Date.today.year.to_s)
+      Time.zone = 'London'
+      expect(body).to include(Time.zone.now.day.to_s)
+      expect(body).to include(Time.zone.now.month.to_s)
+      expect(body).to include(Time.zone.now.year.to_s)
     end
 
     it "includes a null image information when theres no images" do
