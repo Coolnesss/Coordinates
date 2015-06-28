@@ -1,11 +1,11 @@
 class ReportsController < ApplicationController
   before_action :set_report, only: [:show, :edit, :update, :destroy, :ignore]
-  before_action :ensure_that_signed_in
+  before_action :ensure_that_signed_in, except: [:new, :create]
 
   # GET /reports
   # GET /reports.json
   def index
-    @reports = Report.includes(:position).where.not(position: nil).where(ignored: false)
+    @reports = Report.includes(:position).where.not(position: nil).where(ignored: false).order(:cause)
   end
 
   def ignore
