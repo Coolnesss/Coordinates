@@ -290,7 +290,7 @@ DEPENDENCIES
   puma
   rack-cors
   rack-jsonp-middleware
-  rails (= 4.2.0)
+  rails
   rails_12factor
   rspec-its
   rspec-rails (~> 3.0)

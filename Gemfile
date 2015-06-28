@@ -1,8 +1,7 @@
 source 'https://rubygems.org'
-ruby '2.2.0'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.2.0'
+gem 'rails'
 # Use sqlite3 as the database for Active Record
 #gem 'sqlite3'
 # Use SCSS for stylesheets
@@ -64,6 +63,7 @@ group :development, :test do
   gem "better_errors"
   gem 'rspec-rails', '~> 3.0'
 end
+
 group :development do
   gem 'capistrano',         require: false
   gem 'capistrano-rvm',     require: false
@@ -73,6 +73,7 @@ group :development do
 end
 
 gem 'puma'
+
 group :test do
   gem 'factory_girl_rails'
   gem 'capybara'
