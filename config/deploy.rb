@@ -1,5 +1,5 @@
 # Change these
-server '128.199.45.65', port: 3000, roles: [:web, :app, :db], primary: true
+server '128.199.45.65', port: 22, roles: [:web, :app, :db], primary: true
 
 set :repo_url,        'git@github.com:Coolnesss/Coordinates.git'
 set :application,     'Coordinates'
