@@ -22,4 +22,9 @@ test:
 
 production:
   <<: *default
-  database: db/production.sqlite3
+  adapter: postgresql
+  encoding: unicode
+  database: coordinates
+  pool: 5
+  username: chang
+  password: strong-deploy-key
