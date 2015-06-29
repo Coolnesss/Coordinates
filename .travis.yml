@@ -6,13 +6,11 @@ script:
 - RAILS_ENV=test bundle exec rake db:migrate --trace
 - bundle exec rake db:test:prepare
 - bundle exec rspec
-
 sudo: false
-deploy:
-  provider: heroku
-  api_key:
-    secure: fg5eJO7ZdddF9xaMyM0/no3chFEDbLkS2r6b+ENIPuAAc5FxHRda72+8aYcyqFcIF0YK39AtdthDDTgHspDZn8RXnC84T2JKK1V6lEFfVVU2sDrD0RsuJ9AnOZeNpYEEOG5wuLzWyFS7ZlKkyxllD/NfIN2rE7msNYiz1V40bsjluqr3hojsH4NNgOzhs+Pn458nk4PjiS4cbQnOVIYgSgYSmLHMrymkRIsVk0ivoS2NdMWVdsfR1j7wUT31mAU/HXoXMs0nKjxFXsRbO4dBd+atRzXAajyZGMEFac8VNIGbQ0IXL2JrlvfhwUx2GWnro6D3ioMQmKzKd1dRtvK/jBk3UTUrbdDUd0wmrGrkv8FxPX3/bsFb6QgCxZBVQH/U+axj9u44iSkaO3J7gOyp+CRMN4+5/v3ONDjU3ZgSzDjHI005YTDqLBKBjNzgBXlLH3HIwTTVEPYLIOdx1bodViRe4Uj7npzP9+ptvdy17tG7NjJhqegMDPG9so7QkBsJsVFxGT+j4OuVh+0PkjUdki9JOIx1zOIBuBFjfdUxOFYuQHd6zdz3g+IYLfexea7r7dCRA9cwECoh22k2woIPNttR6YQfopAq1Zs+wO6C4BLryFjUicAl4rbuzgNZzH52HyzeFJTcoFAavxwGT/veAk3/xgFk21JZglE4i9Qe2Dg=
-  run: "rake db:migrate"
-  app: pointmap
-  on:
-    repo: Coolnesss/Coordinates
+
+#after_success:
+#- openssl aes-256-cbc -k $DEPLOY_KEY -in config/deploy_id_rsa_enc_travis -d -a -out config/deploy_id_rsa
+#- bundle exec cap deploy
+env:
+  global:
+    secure: R82HREB/zicQsbYPCsOMuc2gK7hgijLrAdLIK9942N/8KV1n7Yi5WwwmyqGZExGvZprEvB6lWcVvhfvq9q14atfo0olwtbnrioInB0CBOo/rR39vqxZYm2tj6TFe77rZ6/qXG5s8gTOn4YHrp0Fe6eSvb8NkS9goUVerTCohd5RfNb2TSrhEOIGPdaEbFAyQuZeZ5OwzMkhVR+AquDoInmPheYkJ9SGvx003ctYsw8YWJkUstou4bqv2XJHYUocbzFVKVazSILbLDqI9yRd3glRKp0VpKmRVil4bsprO3eZqPsyTlOpcvEgQje8ZNo1/fN1pvY8D6SGjWhwTghz4ZvP7KlDpXEoHm/Y/C37MTz90JCSJWDpBk54cXA65CBHx1/1WpzAXLpl70xCKB07/h7E3YzLYdxtxIJ/qtPbKMO0B/GY1ZkrY4EDq3xkXdcqQhvecwmKCvPL21M8EP8nQ/cOhDk9UN7o9zUiWJbrag9CnBQ2l+ffcH8nmU2hM+ty07dWV+IiM0WmBz3Q8of6hCjL43c0F1OFjfi6+SE+B/iRp+0smg1vO8o6J4k64y8KLiavaRs0/UDWwboX7nXyM0a/WgEun906lSXIuceuLsgRN6D5gllOkP9yt5lKbnuaIoFy+BPdhBZAD2FmxvOOH2iBFB6ZvmynGXrWiECVd0qw=
