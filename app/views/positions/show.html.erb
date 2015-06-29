@@ -11,6 +11,8 @@
         <%= @position.lat %></span>
       Votes <span class="label label-success">
         <%= @position.votes or 0 %></span>
+      Reports <span class="label label-danger">
+        <%= @position.reports.count %></span>
     </h4>
     </div>
     <h4>Description</h4>

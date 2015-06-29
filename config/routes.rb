@@ -3,10 +3,10 @@ Rails.application.routes.draw do
   resources :reports
   resources :positions
   resource :session, only: [:new, :create, :delete]
-  
+
 
   root 'positions#index'
-  get 'positions/:id/vote' => 'positions#vote'
+  get 'positions/:id/vote' => 'positions#vote', :as => "vote_position"
   get 'map' => 'positions#map'
   get 'reports/:id/ignore' => 'reports#ignore', :as => 'ignore_report'
   get 'signin', to: 'sessions#new'

@@ -49,6 +49,13 @@ describe "Positions API" do
 
       expect(body).to include('"votes"=>0')
     end
+
+    it "can vote" do
+      FactoryGirl.create :position
+      get "/positions/1/vote", {}, { "Accept" => "application/json" }
+
+      expect(Position.first.votes).to eq(1)
+    end
   end
 
   describe "POST /positions" do
