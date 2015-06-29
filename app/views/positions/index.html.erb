@@ -21,7 +21,9 @@
           <td><%= link_to position.name, position %></td>
         <% end %>
         <td><%= position.description %></td>
-        <td><span class="badge"><%= position.votes %></span></td>
+        <td><span class="badge">
+          <% if position.votes.nil? %>0<% else %><%= position.votes %><% end %>
+          </span></td>
         <% if current_user %>
           <td><%= link_to 'Edit', edit_position_path(position), class: "btn btn-warning btn-xs" %></td>
           <td><%= link_to 'Destroy', position, class:"btn btn-danger btn-xs", method: :delete, data: { confirm: 'Are you sure?' } %></td>
