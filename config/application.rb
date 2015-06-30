@@ -25,10 +25,15 @@ module Coordinates
     config.middleware.use Rack::JSONP
     config.middleware.use Rack::Cors do
       allow do
-        origins 'ronil.kapsi.fi'
+        origins 'fillari.info'
+
         resource %r{/positions.json},
-        :headers => ['Origin', 'Accept', 'Content-Type'],
-        :methods => [:get, :post, :put, :delete]
+          :headers => :any,
+          :methods => [:get, :post, :put, :delete]
+
+        resource %r{/reports.json},
+          :headers => :any,
+          :methods => [:get, :post, :put, :delete]
       end
     end
 
