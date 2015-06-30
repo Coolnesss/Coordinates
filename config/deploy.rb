@@ -7,7 +7,8 @@ set :user,            'chang'
 set :puma_threads,    [4, 16]
 set :puma_workers,    0
 set :default_env, {
-  "SECRET_KEY_BASE" => ENV["SECRET_KEY_BASE"]
+  set :aws_access_key_id, ENV["AWS_ACCESS_KEY_ID"]
+  set :aws_secret_access_key, ENV["AWS_SECRET_ACCESS_KEY"]
 }
 
 
@@ -38,7 +39,7 @@ set :puma_init_active_record, true  # Change to false when not using ActiveRecor
 # set :linked_files, %w{config/database.yml}
  set :linked_dirs,  %w{log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system}
  set :bundle_binstubs, nil
- 
+
 namespace :puma do
   desc 'Create Directories for Puma Pids and Socket'
   task :make_dirs do
