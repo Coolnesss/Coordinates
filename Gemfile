@@ -30,6 +30,7 @@ gem 'aws-sdk', '< 2.0'
 gem 'email_validator'
 gem 'bcrypt'
 gem "font-awesome-rails"
+gem 'figaro'
 
 gem 'rack-jsonp-middleware',
   :require => 'rack/jsonp'
