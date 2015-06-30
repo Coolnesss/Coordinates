@@ -6,10 +6,6 @@ set :application,     'Coordinates'
 set :user,            'chang'
 set :puma_threads,    [4, 16]
 set :puma_workers,    0
-set :default_env, {
-  set :aws_access_key_id, ENV["AWS_ACCESS_KEY_ID"]
-  set :aws_secret_access_key, ENV["AWS_SECRET_ACCESS_KEY"]
-}
 
 
 # Don't change these unless you know what you're doing
