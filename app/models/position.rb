@@ -5,7 +5,7 @@ class Position < ActiveRecord::Base
   validates :email, :email => true
   validates :name, :description, :lon, :lat, presence: true
   validates :name, length: { maximum: 20 }
-  validates :description, length: { maximum: 340 }
+  validates :description, length: { minimum: 20, maximum: 270 }
   validates_numericality_of :lon
   validates_numericality_of :lat
 

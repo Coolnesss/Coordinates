@@ -63,7 +63,7 @@ describe "Positions API" do
       json = { :format => 'json',
         :position => {
           :name => "foo",
-          :description => "bar",
+          :description => "The best place on earth",
           :lon => "asd",
           :lat => "asd",
           :email => "lol@chang.fi"
@@ -78,7 +78,7 @@ describe "Positions API" do
       json = { :format => 'json',
         :position => {
           :name => "foo",
-          :description => "bar",
+          :description => "The best place on earth",
           :lon => 123,
           :lat => 123,
           :email => "lol@chang.fi"
@@ -105,7 +105,7 @@ describe "Positions API" do
       json = { :format => 'json',
         :position => {
           :name => "reallylongsuperlongamericalongname",
-          :description => "s",
+          :description => "The best place on earth",
           :lon => 1,
           :lat => 1,
           :email => "lol@chang.fi"

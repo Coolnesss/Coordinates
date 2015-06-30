@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe "Report" do
+describe "Position" do
 
   it "can vote on a position" do
     pos = FactoryGirl.create :position
