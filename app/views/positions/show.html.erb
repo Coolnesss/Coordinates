@@ -2,7 +2,9 @@
 <br>
 <div class="row">
   <div class="col-md-8 col-md-offset-2">
-    <h1><%= @position.name %></h1>
+    <h1><%= @position.name %>
+      <%= link_to "<i class='fa fa-globe'></i> Map link".html_safe, "http://fillari.info/#id=#{@position.id}", class:"btn btn-default btn-xs" %>
+    </h1>
     <div class="row">
     <h4 class="text-center">
       Longitude <span class="label label-primary">

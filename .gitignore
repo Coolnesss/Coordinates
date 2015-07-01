@@ -18,6 +18,7 @@
 
 **/local_env.yml
 **/app_environment_variables.rb
+**/config.env
 
 # Ignore application configuration
 /config/application.yml
