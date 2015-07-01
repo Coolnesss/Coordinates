@@ -33,7 +33,8 @@ set :puma_init_active_record, true  # Change to false when not using ActiveRecor
 
 ## Linked Files & Directories (Default None):
 # set :linked_files, %w{config/database.yml}
- set :linked_dirs,  %w{log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system}
+ set :linked_files, %w(config.env)
+ set :linked_dirs,  %w{log}
  set :bundle_binstubs, nil
 
 namespace :puma do
@@ -79,6 +80,16 @@ namespace :deploy do
   after  :finishing,    :compile_assets
   after  :finishing,    :cleanup
   after  :finishing,    :restart
+
+  # Uploading both linked_files and dirs
+  before :finishing, 'linked_files:upload'
+
+  # Uploading only linked_files
+  before :finishing, 'linked_files:upload_files'
+
+  # Uploading only dirs
+  before :finishing, 'linked_files:upload_dirs'
+
 end
 
 # ps aux | grep puma    # Get puma pid
