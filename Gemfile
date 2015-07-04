@@ -32,7 +32,7 @@ gem 'aws-sdk', '< 2.0'
 gem 'email_validator'
 gem 'bcrypt'
 gem "font-awesome-rails"
-gem 'figaro'
+#gem 'figaro'
 
 gem 'rack-jsonp-middleware',
   :require => 'rack/jsonp'
@@ -83,7 +83,7 @@ group :test do
   gem 'launchy'
   gem 'simplecov', require: false
   gem 'rspec-its'
-#  gem 'webmock'
+  gem 'webmock'
   gem 'selenium-webdriver'
   gem 'database_cleaner'
 end

@@ -72,4 +72,38 @@ describe Position do
     expect(position).not_to be_valid
     expect(Position.count).to eq(0)
   end
+
+  it "will save a position with a picture" do
+    AWS.stub!
+    position = FactoryGirl.create(:position)
+
+    file = File.new(Rails.root.join('spec/helpers/missing.png'))
+    image = position.pictures.create(:image => ActionDispatch::Http::UploadedFile.new(:tempfile => file, :filename => File.basename(file), :content_type => 'image/png'))
+    image.image_content_type = "image/png"
+
+    expect(image).to be_valid
+    expect(position.pictures.first.image_file_name).to eq("missing.png")
+    expect(image.position).to eq(position)
+  end
+
+  it "will save a position with two images" do
+    AWS.stub!
+    position = FactoryGirl.create(:position)
+
+    file = File.new(Rails.root.join('spec/helpers/missing.png'))
+    filetwo = File.new(Rails.root.join('spec/helpers/woodpecker.png'))
+
+    image = position.pictures.create(:image => ActionDispatch::Http::UploadedFile.new(:tempfile => file, :filename => File.basename(file), :content_type => 'image/png'))
+    imagetwo = position.pictures.create(:image => ActionDispatch::Http::UploadedFile.new(:tempfile => filetwo, :filename => File.basename(filetwo), :content_type => 'image/png'))
+
+    imagetwo.image_content_type = "image/png"
+    image.image_content_type = "image/png"
+
+    expect(position.pictures.first.image_file_name).to eq("missing.png")
+    expect(position.pictures.second.image_file_name).to eq("woodpecker.png")
+
+    expect(image).to be_valid
+    expect(imagetwo).to be_valid
+    expect(position).to be_valid
+  end
 end
