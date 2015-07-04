@@ -1,4 +1,5 @@
 require 'rails_helper'
+include ActionDispatch::TestProcess
 
 describe Position do
   it "can save a position with name and description" do

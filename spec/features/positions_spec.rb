@@ -1,7 +1,7 @@
 require 'rails_helper'
+require 'rack/test'
 
 describe "Position" do
-
   it "can vote on a position" do
     pos = FactoryGirl.create :position
 

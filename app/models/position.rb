@@ -1,6 +1,7 @@
 class Position < ActiveRecord::Base
 
   has_many :reports, dependent: :destroy
+  has_many :pictures, :dependent => :destroy
 
   validates :email, :email => true
   validates :name, :description, :lon, :lat, presence: true
@@ -9,12 +10,23 @@ class Position < ActiveRecord::Base
   validates_numericality_of :lon
   validates_numericality_of :lat
 
-  has_attached_file :image, :styles => { :medium => "300x300>", :thumb => "85x85>" }, :default_url => "null"
-  validates_attachment_content_type :image, :content_type => /\Aimage\/.*\Z/
+  accepts_nested_attributes_for :pictures#, :reject_if => lambda { |t| t['picture'].nil? }
+
 
   def date_format
     date = self.created_at
     date.day.to_s + "." + date.month.to_s + "." + date.year.to_s
+  end
+
+  def picture_urls
+    if self.pictures.empty? then
+      return nil
+    end
+    urls = Array.new
+    self.pictures.each do |p|
+      urls << p.image.url
+    end
+    urls
   end
 
 end

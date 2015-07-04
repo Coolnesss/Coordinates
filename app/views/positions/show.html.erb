@@ -24,10 +24,6 @@
   </div>
 </div>
 
-<% if not @position.image.url == "null" %>
-  <p class="text-center"><%= image_tag @position.image.url(:medium) %></p>
-<% end %>
-
 
 <%= link_to 'Edit', edit_position_path(@position), class: "btn btn-warning" %>
 <%= link_to 'Back', positions_path, class: "btn btn-default" %>

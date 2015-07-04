@@ -38,7 +38,7 @@ describe "Positions API" do
       get "/positions", {}, { "Accept" => "application/json" }
 
       body = JSON.parse(response.body).to_s
-      expect(body).to include('"image"=>"null"')
+      expect(body).to include('"images"=>nil')
     end
 
     it "includes votes" do

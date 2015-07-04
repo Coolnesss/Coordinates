@@ -33,7 +33,7 @@ set :puma_init_active_record, true  # Change to false when not using ActiveRecor
 
 ## Linked Files & Directories (Default None):
 # set :linked_files, %w{config/database.yml}
- set :linked_files, %w(config.env)
+ set :linked_files, %w(.env aws.yml)
  set :linked_dirs,  %w{log}
  set :bundle_binstubs, nil
 

@@ -1,3 +1,5 @@
+require 'rack/test'
+
 FactoryGirl.define do
   factory :position do
     name "BestName"
@@ -20,5 +22,10 @@ FactoryGirl.define do
     username "Sam"
     password "Samisbest"
     password_confirmation "Samisbest"
+  end
+
+  factory :picture do
+    image { Rack::Test::UploadedFile.new(:tempfile => Rails.root + 'spec/helpers/missing.png', :filename => 'missing.png') }
+    #image { (Rails.root.join('test', 'fixtures', 'missing.png'), 'image/png') }
   end
 end

@@ -33,7 +33,7 @@ class PositionsController < ApplicationController
           description: position.description,
           votes: position.votes,
           date: position.date_format,
-          image: position.image.url
+          images: position.picture_urls
         }
       }
 
@@ -66,6 +66,11 @@ class PositionsController < ApplicationController
 
     respond_to do |format|
       if @position.save
+        if params[:images]
+          params[:images].each { |image|
+            @position.pictures.create(image: image)
+          }
+        end
         format.html { redirect_to @position, notice: 'Position was successfully created.' }
         format.json { render :show, status: :created, location: @position }
       else
@@ -107,6 +112,6 @@ class PositionsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def position_params
-      params.require(:position).permit(:lon, :lat, :name, :description, :image, :email)
+      params.require(:position).permit(:lon, :lat, :name, :description, :email, pictures: [:image])
     end
 end
