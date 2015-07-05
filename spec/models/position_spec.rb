@@ -17,31 +17,24 @@ describe Position do
   end
 
   it "wont save a position with a really long name" do
-    position = Position.create(
-      name: "reallyreallyreallyreallylongname",
-      description: "a",
-      lon: 123,
-      lat: 123
-    )
+    position = FactoryGirl.build(:position, name: "reallyreallyreallyreallylongname")
+    position.save
 
     expect(position).not_to be_valid
     expect(Position.count).to eq(0)
   end
 
   it "wont save a position with a really long description" do
-    position = Position.create(
-      name: "l",
+    position = FactoryGirl.build(:position,
       description: "reallyreallyreallyreallylongname
       asddasdasdasdasadsadsadsadsssssssssssssssssssssssssssssssssssssssss
       adsssssssssssssssssssssssssssssssssssssssssssssssssssssssssss
       adssssssssssssssssssssssssssssssssssssssssssssssssssss
       adssssssssssssssssssssssssssssssssssssssssssssssssss
       asdddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd
-      adsssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss",
-      lon: 123,
-      lat: 123
+      adsssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss"
     )
-
+    position.save
     expect(position).not_to be_valid
     expect(Position.count).to eq(0)
   end
@@ -62,12 +55,8 @@ describe Position do
   end
 
   it "wont save a position with a string longitude" do
-    position = Position.create(
-    name: "america",
-    description: "aqwe",
-    lon: "boss",
-    lat: 123
-    )
+    position = FactoryGirl.build(:position, lon: "boss")
+    position.save
 
     expect(position).not_to be_valid
     expect(Position.count).to eq(0)
