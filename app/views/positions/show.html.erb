@@ -21,6 +21,9 @@
     <div class="well">
       <%= @position.description %>
     </div>
+    <% @position.pictures.each do |p| %>
+      <%= image_tag p.image.url, style: "width:50%;height:50%" %>
+    <% end %>
   </div>
 </div>
 
