@@ -116,8 +116,15 @@ describe "Positions API" do
       expect(Position.count).to eq(0)
     end
 
-    it "saves a position with a picture" do
-      #TODO
+    it "saves a position with a fb_id" do
+      json = { :format => 'json',
+        :position => FactoryGirl.attributes_for(:position)
+      }
+      post "/positions.json", json
+
+      expect(Position.count).to eq(1)
+      expect(Position.first.fb_id).not_to be_nil
     end
+
   end
 end

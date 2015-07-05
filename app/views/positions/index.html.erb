@@ -22,7 +22,11 @@
         <% else %>
           <td><%= link_to position.name, position %></td>
         <% end %>
-        <td><%= position.email %></td>
+        <% if not position.email.nil? %>
+          <td><%= link_to position.email, "https://facebook.com/app_scoped_user_id/#{position.fb_id}" %></td>
+        <% else %>
+          <td><%= link_to 'Facebook', "https://facebook.com/app_scoped_user_id/#{position.fb_id}" %></td> 
+        <% end %>
         <td><%= position.description %></td>
         <td><span class="badge">
           <% if position.votes.nil? %>0<% else %><%= position.votes %><% end %>

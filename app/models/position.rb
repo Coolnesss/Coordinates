@@ -3,12 +3,13 @@ class Position < ActiveRecord::Base
   has_many :reports, dependent: :destroy
   has_many :pictures, :dependent => :destroy
 
-  validates :email, :email => true
+  validates :email, email: true, allow_nil: true
   validates :name, :description, :lon, :lat, presence: true
   validates :name, length: { maximum: 27 }
   validates :description, length: { minimum: 20, maximum: 270 }
   validates_numericality_of :lon
   validates_numericality_of :lat
+
 
   accepts_nested_attributes_for :pictures#, :reject_if => lambda { |t| t['picture'].nil? }
 

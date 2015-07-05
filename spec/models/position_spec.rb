@@ -95,4 +95,20 @@ describe Position do
     expect(imagetwo).to be_valid
     expect(position).to be_valid
   end
+
+  it "will save a position with no email" do
+    position = FactoryGirl.build(:position, email: nil)
+    position.save
+    expect(position).to be_valid
+    expect(Position.count).to eq(1)
+  end
+
+  it "wont save a position with an invalid email" do
+    position = FactoryGirl.build(:position, email: "lol")
+    position.save
+
+    expect(position).not_to be_valid
+    expect(Position.count).to eq(0)
+  end
+
 end

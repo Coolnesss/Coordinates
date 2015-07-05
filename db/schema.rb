@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150703095241) do
+ActiveRecord::Schema.define(version: 20150705182903) do
 
   create_table "pictures", force: :cascade do |t|
     t.integer  "position_id"
@@ -36,6 +36,7 @@ ActiveRecord::Schema.define(version: 20150703095241) do
     t.integer  "image_file_size"
     t.datetime "image_updated_at"
     t.string   "email"
+    t.string   "fb_id"
   end
 
   create_table "reports", force: :cascade do |t|
@@ -46,6 +47,7 @@ ActiveRecord::Schema.define(version: 20150703095241) do
     t.datetime "updated_at",  null: false
     t.boolean  "ignored"
     t.integer  "position_id"
+    t.string   "fb_id"
   end
 
   create_table "users", force: :cascade do |t|

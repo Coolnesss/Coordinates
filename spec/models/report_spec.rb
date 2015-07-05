@@ -14,12 +14,12 @@ describe Report do
     expect(Report.count).to eq(0)
   end
 
-  it "Cannot save a report without an email" do
+  it "Can save a report without an email" do
     report =  FactoryGirl.build(:report, email: nil)
     report.save
 
-    expect(report).not_to be_valid
-    expect(Report.count).to eq(0)
+    expect(report).to be_valid
+    expect(Report.count).to eq(1)
   end
 
   it "Cannot save a report without a position" do

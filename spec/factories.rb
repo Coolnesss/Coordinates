@@ -8,6 +8,7 @@ FactoryGirl.define do
     lat 8435571.22109427
     votes 0
     email "chang@best.fi"
+    fb_id 1154034356884883
   end
 
   factory :report do
@@ -15,6 +16,7 @@ FactoryGirl.define do
     description "This site sucks"
     email "sam@random.com"
     ignored false
+    fb_id 1154034356884883
     position
   end
 
