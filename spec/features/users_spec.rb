@@ -44,7 +44,18 @@ describe "User" do
   it "cannot see reports page without being logged in" do
     visit reports_path
 
-    expect(page).to have_content("You should be signed in to view reports")
+    expect(page).to have_content("You should be signed in to do this")
   end
 
+  it "cannot view users if not signed in" do
+    visit users_path
+
+    expect(page).to have_content("You should be signed in to do this")
+  end
+
+  it "cannot create users if not signed in" do
+    visit new_user_path
+
+    expect(page).to have_content("You should be signed in to do this")
+  end
 end

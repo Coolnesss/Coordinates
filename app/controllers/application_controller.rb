@@ -11,7 +11,7 @@ class ApplicationController < ActionController::Base
   end
 
   def ensure_that_signed_in
-    redirect_to signin_path, notice:'You should be signed in to view reports' if current_user.nil?
+    redirect_to signin_path, notice:'You should be signed in to do this' if current_user.nil?
   end
 
   def cause_color(cause)

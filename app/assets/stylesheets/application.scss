@@ -19,3 +19,20 @@ h1 {
 .label {
   border-radius: 0px
 }
+
+.myNavbar {
+    background-color: transparent;
+    color:#222;
+    border: 1px solid #333;
+ }
+
+.navi-right {
+  @extend .nav;
+  @extend .navbar-btn;
+  @extend .navbar-right;
+}
+
+.navi-left {
+  @extend .nav;
+  @extend .navbar-btn;
+}

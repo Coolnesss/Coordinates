@@ -8,14 +8,15 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-  <ul class="nav nav-tabs">
-    <li><%= link_to "<i class='fa fa-globe'></i> Pointmap".html_safe, root_path, class:"navbar-brand" %></li>
-    <li><%= link_to "<i class='fa fa-map-marker fa-fw'></i> Positions".html_safe, positions_path %></li>
+  <ul class="nav nav-tabs" role="navigation">
+    <li><%= link_to "<i class='fa fa-location-arrow'></i> Pointmap".html_safe, root_path, class:"navbar-brand" %></li>
+    <li class="navbar-btn"><%= link_to "<i class='fa fa-map-marker fa-fw'></i> Positions".html_safe, positions_path %></li>
     <% if current_user %>
-      <li><%= link_to "<i class='fa fa-flag fa-fw'></i> Reports".html_safe, reports_path %></li>
-      <li class="nav navbar-right"><%= link_to "<i class='fa fa-sign-out fa-fw'></i> Sign out".html_safe, signout_path, method: :delete %></li>
+      <li class="navbar-btn"><%= link_to "<i class='fa fa-exclamation-triangle fa-fw'></i> Reports".html_safe, reports_path %></li>
+      <li class="navi-right"><%= link_to "<i class='fa fa-sign-out fa-fw'></i> Sign out".html_safe, signout_path, method: :delete %></li>
+      <li class="navi-right"><%= link_to "<i class='fa fa-user-secret'></i> #{current_user.username}".html_safe, users_path %></li>
     <% else %>
-      <li class="nav navbar-right"><%= link_to "<i class='fa fa-sign-in fa-fw'></i> Sign in".html_safe, signin_path %></li>
+      <li class="navi-right"><%= link_to "<i class='fa fa-sign-in fa-fw'></i> Sign in".html_safe, signin_path %></li>
     <% end %>
   </ul>
   <%= flash_messages %>
