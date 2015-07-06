@@ -1,5 +1,6 @@
 class PositionsController < ApplicationController
   before_action :set_position, only: [:show, :edit, :update, :destroy, :vote]
+  before_action :ensure_that_signed_in, except: [:index, :new, :create, :vote]
 
   def vote
     @position.increment!(:votes)

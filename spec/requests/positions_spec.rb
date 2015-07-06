@@ -125,6 +125,18 @@ describe "Positions API" do
       expect(Position.count).to eq(1)
       expect(Position.first.fb_id).not_to be_nil
     end
+  end
+  describe "DELETE /positions" do
 
+    before (:each) do
+      @position = FactoryGirl.create :position
+      FactoryGirl.create :user
+    end
+
+    it "cannot destroy position without auth" do
+      delete "/positions/1"
+
+      expect(Position.count).to eq(1)
+    end
   end
 end

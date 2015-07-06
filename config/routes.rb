@@ -9,8 +9,8 @@ Rails.application.routes.draw do
   get 'positions/:id/vote' => 'positions#vote', :as => "vote_position"
   get 'map' => 'positions#map'
   get 'reports/:id/ignore' => 'reports#ignore', :as => 'ignore_report'
-  get 'signin', to: 'sessions#new'
-  delete 'signout', to: 'sessions#destroy'
+  get 'signin', to: 'sessions#new', as: "signin"
+  delete 'signout', to: 'sessions#destroy', as: "signout"
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
