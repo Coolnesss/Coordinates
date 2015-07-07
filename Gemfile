@@ -83,7 +83,7 @@ group :test do
   gem 'launchy'
   gem 'simplecov','~> 0.7', require: false
   gem 'rspec-its'
-  gem 'webmock'
+  #gem 'webmock'
   gem 'selenium-webdriver'
   gem 'database_cleaner'
   gem "codeclimate-test-reporter", require: nil
