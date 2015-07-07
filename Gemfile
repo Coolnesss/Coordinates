@@ -81,7 +81,7 @@ group :test do
   gem 'factory_girl_rails'
   gem 'capybara'
   gem 'launchy'
-  gem 'simplecov', require: false
+  gem 'simplecov','~> 0.7', require: false
   gem 'rspec-its'
   gem 'webmock'
   gem 'selenium-webdriver'
