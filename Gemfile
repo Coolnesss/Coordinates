@@ -86,4 +86,5 @@ group :test do
   gem 'webmock'
   gem 'selenium-webdriver'
   gem 'database_cleaner'
+  gem "codeclimate-test-reporter", require: nil
 end
