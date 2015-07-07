@@ -7,6 +7,10 @@ script:
 - bundle exec rake db:test:prepare
 - bundle exec rspec
 sudo: false
+addons:
+  code_climate:
+    repo_token: 3d1fd23de09bc309034064043b882d7c3a8ba832ebc361fa16c8b6c0b460bc69
+
 
 #after_success:
 #- openssl aes-256-cbc -k $DEPLOY_KEY -in config/deploy_id_rsa_enc_travis -d -a -out config/deploy_id_rsa
