@@ -6,7 +6,9 @@
   <thead>
     <tr>
       <th>Name</th>
-      <th>Added by</th>
+      <% if current_user %>
+        <th>Added by</th>
+      <% end %>
       <th>Description</th>
       <th>Votes</th>
       <th>Reports</th>
@@ -22,16 +24,18 @@
         <% else %>
           <td><%= link_to position.name, position %></td>
         <% end %>
-        <% if not position.email.nil? %>
-          <td><%= link_to position.email, "https://facebook.com/app_scoped_user_id/#{position.fb_id}" %></td>
-        <% else %>
-          <td><%= link_to 'Facebook', "https://facebook.com/app_scoped_user_id/#{position.fb_id}" %></td> 
+        <% if current_user %>
+          <% if not position.email.nil? %>
+            <td><%= link_to position.email, "https://facebook.com/app_scoped_user_id/#{position.fb_id}" %></td>
+          <% else %>
+            <td><%= link_to 'Facebook', "https://facebook.com/app_scoped_user_id/#{position.fb_id}" %></td>
+          <% end %>
         <% end %>
         <td><%= position.description %></td>
         <td><span class="badge">
           <% if position.votes.nil? %>0<% else %><%= position.votes %><% end %>
           </span></td>
-          <td><span class="label label-danger"><%= position.reports.count %></span></td>
+          <td><span class="badge-danger"><%= position.reports.count %></span></td>
         <% if current_user %>
           <td><%= link_to 'Edit', edit_position_path(position), class: "btn btn-warning btn-xs" %></td>
           <td><%= link_to 'Destroy', position, class:"btn btn-danger btn-xs", method: :delete, data: { confirm: 'Are you sure?' } %></td>

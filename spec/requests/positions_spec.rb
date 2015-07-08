@@ -56,6 +56,13 @@ describe "Positions API" do
 
       expect(Position.first.votes).to eq(1)
     end
+
+    it "doesn't contain fb_id or email" do
+      get "/positions", {}, { "Accept" => "application/json" }
+
+      expect(body).not_to include("email")
+      expect(body).not_to include("fb_id")
+    end
   end
 
   describe "POST /positions" do

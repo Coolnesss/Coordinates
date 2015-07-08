@@ -10,21 +10,37 @@ body {
 
 h1 {
   @extend .text-center;
+  letter-spacing: 1px;
 }
 
 .btn {
-  border-radius: 0px
+    border-width: 2px;
+    font-weight: 700;
+    background: none;
+    color: inherit;
 }
 
-.label {
-  border-radius: 0px
+.navbar-brand {
+  font-family:  monospace;
+  color: black;
+  font-weight: 700;
+  letter-spacing: 1px;
 }
 
-.myNavbar {
-    background-color: transparent;
-    color:#222;
-    border: 1px solid #333;
- }
+.navbar-btn {
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.badge {
+  background-color: #7EA8D4;
+}
+
+.badge-danger {
+  @extend .badge;
+  background-color: #B74934;
+}
 
 .navi-right {
   @extend .nav;
