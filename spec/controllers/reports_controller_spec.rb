@@ -8,7 +8,7 @@ RSpec.describe ReportsController, :type => :controller do
   end
 
   describe "GET reports" do
-    it "Can't get reports without being logged in" do
+    it "can't get reports without being logged in" do
       controller.session[:user_id] = nil
       FactoryGirl.create(:report)
 
@@ -17,6 +17,15 @@ RSpec.describe ReportsController, :type => :controller do
       expect(response.status).to eq 302
       expect(response.body).not_to eq "Useless"
     end
+
+    it "renders index with correct labels" do
+      report = FactoryGirl.create(:report, cause: "fixed")
+      get :index
+
+      expect(response).to render_template :index
+      expect(assigns(:reports)).to eq([report])
+    end
+
   end
 
   describe "POST reports" do
