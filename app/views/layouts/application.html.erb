@@ -2,14 +2,14 @@
 <html>
 <link href='http://fonts.googleapis.com/css?family=Ubuntu:400,700' rel='stylesheet' type='text/css'>
 <head>
-  <title>Coordinates</title>
+  <title>Fillari.info</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
 <body>
   <ul class="nav nav-tabs" role="navigation">
-    <li><%= link_to "<i class='fa fa-location-arrow'></i> Pointmap".html_safe, root_path, class:"navbar-brand" %></li>
+    <li><%= link_to "<i class='fa fa-bicycle'></i> Fillari.info".html_safe, root_path, class:"navbar-brand" %></li>
     <li class="navbar-btn"><%= link_to "<i class='fa fa-map-marker fa-fw'></i> Positions".html_safe, positions_path %></li>
     <% if current_user %>
       <li class="navbar-btn"><%= link_to "<i class='fa fa-exclamation-triangle fa-fw'></i> Reports".html_safe, reports_path %></li>

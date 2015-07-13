@@ -25,7 +25,6 @@ RSpec.describe ReportsController, :type => :controller do
       expect(response).to render_template :index
       expect(assigns(:reports)).to eq([report])
     end
-
   end
 
   describe "POST reports" do
@@ -71,6 +70,5 @@ RSpec.describe ReportsController, :type => :controller do
 
       expect(Report.first.description).to eq("Not updated yet! Maybe")
     end
-
   end
 end

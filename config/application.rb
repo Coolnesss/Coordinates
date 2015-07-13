@@ -35,7 +35,7 @@ module Coordinates
     config.middleware.use Rack::JSONP
     config.middleware.use Rack::Cors do
       allow do
-        origins 'fillari.info', 'm.fillari.info'
+        origins 'fillari.info', 'm.fillari.info', "dev.fillari.info", "m.dev.fillari.info"
 
         resource %r{/positions.json},
           :headers => :any,

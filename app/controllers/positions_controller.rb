@@ -13,7 +13,7 @@ class PositionsController < ApplicationController
   # GET /positions
   # GET /positions.json
   def index
-    @positions = Position.all
+    @positions = Position.all.order(:name)
     @geojson = Array.new
 
     @points = Array.new

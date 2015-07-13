@@ -20,8 +20,9 @@ h1 {
     color: inherit;
 }
 
-.navbar-brand {
+.nav-tabs .navbar-brand {
   font-family:  monospace;
+  border-radius:0;
   color: black;
   font-weight: 700;
   letter-spacing: 1px;
