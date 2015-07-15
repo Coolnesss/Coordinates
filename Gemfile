@@ -76,7 +76,7 @@ group :development do
 end
 
 gem 'puma'
-
+gem 'rack-attack'
 group :test do
   gem 'factory_girl_rails'
   gem 'capybara'

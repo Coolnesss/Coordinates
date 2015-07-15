@@ -160,6 +160,8 @@ GEM
     puma (2.11.3)
       rack (>= 1.1, < 2.0)
     rack (1.6.2)
+    rack-attack (4.3.0)
+      rack
     rack-cors (0.3.1)
     rack-jsonp-middleware (0.0.10)
       rack
@@ -293,6 +295,7 @@ DEPENDENCIES
   paperclip
   pg
   puma
+  rack-attack
   rack-cors
   rack-jsonp-middleware
   rails
