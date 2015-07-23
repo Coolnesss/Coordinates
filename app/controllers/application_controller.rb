@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :null_session
 
-  helper_method :current_user, :cause_color, :cause_label
+  helper_method :current_user, :cause_color, :cause_label, :category_label
 
   def current_user
     return nil if session[:user_id].nil? or User.all.find_by(id:session[:user_id]).nil?
@@ -14,9 +14,19 @@ class ApplicationController < ActionController::Base
     redirect_to signin_path, notice:'You should be signed in to do this' if current_user.nil?
   end
 
+  def thing_label(thing, colors)
+    if thing == nil then return "default" end
+    if (not colors.has_key?(thing.downcase)) then return "default" end
+    colors[thing.downcase]
+  end
+
   def cause_label(cause)
     colors = {"fixed" => "success", "spam" => "danger", "other" => "info"}
-    if (not colors.has_key?(cause.downcase)) then return "default" end
-    colors[cause.downcase]
+    thing_label(cause, colors)
+  end
+
+  def category_label(category)
+    colors = {"poikkeusreitti" => "success", "talvikunnossapito" => "info"}
+    thing_label(category, colors)
   end
 end

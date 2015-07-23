@@ -53,4 +53,13 @@ describe "Report" do
 
     expect(page).to have_content("You should be")
   end
+
+  it "has the correct CSS label when saved with a cause" do
+    FactoryGirl.create(:report)
+
+    visit reports_path
+    expect(page).to have_css('span.label')
+    expect(page).to have_css('span.label-success')
+  end
+
 end
