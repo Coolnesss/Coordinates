@@ -33,4 +33,13 @@ describe "Position" do
     expect(Position.first.updated_at).not_to eq(Position.first.created_at)
     expect(Position.first.description).to eq("This is the best description")
   end
+
+  it "has the correct CSS label when saved with a category" do
+    FactoryGirl.create(:position)
+
+    visit positions_path
+    expect(page).to have_css('span.label')
+    expect(page).to have_css('span.label-success')
+  end
+
 end

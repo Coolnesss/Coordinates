@@ -14,7 +14,7 @@ describe "User" do
 
     expect(page).to have_content("Sign out")
     #check redirect to reports page
-    expect(page).to have_content("Useless")
+    expect(page).to have_content("Fixed")
   end
 
   it "cannot sign in with a nonexistent user" do

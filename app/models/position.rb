@@ -3,6 +3,8 @@ class Position < ActiveRecord::Base
   has_many :reports, dependent: :destroy
   has_many :pictures, :dependent => :destroy
 
+  enum category: [ :talvikunnossapito, :poikkeusreitti ]
+
   validates :email, email: true, allow_nil: true
   validates :name, :description, :lon, :lat, presence: true
   validates :name, length: { maximum: 27 }

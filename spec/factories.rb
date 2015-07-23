@@ -9,10 +9,11 @@ FactoryGirl.define do
     votes 0
     email "chang@best.fi"
     fb_id 1154034356884883
+    category "poikkeusreitti"
   end
 
   factory :report do
-    cause "Useless"
+    cause "fixed"
     description "This site sucks"
     email "sam@random.com"
     ignored false

@@ -58,10 +58,21 @@ describe "Positions API" do
     end
 
     it "doesn't contain fb_id or email" do
+      FactoryGirl.create :position
       get "/positions", {}, { "Accept" => "application/json" }
 
       expect(body).not_to include("email")
       expect(body).not_to include("fb_id")
+    end
+
+    it "contains category information" do
+      FactoryGirl.create :position
+
+      get "/positions", {}, { "Accept" => "application/json" }
+
+      expect(body).to include("category")
+      expect(body).to include("poikkeusreitti")
+
     end
   end
 
@@ -131,6 +142,16 @@ describe "Positions API" do
 
       expect(Position.count).to eq(1)
       expect(Position.first.fb_id).not_to be_nil
+    end
+
+    it "saves a position with a category" do
+      json = { :format => 'json',
+        :position => FactoryGirl.attributes_for(:position)
+      }
+      post "/positions.json", json
+
+      expect(Position.count).to eq(1)
+      expect(Position.first.category).not_to be_nil
     end
   end
   describe "DELETE /positions" do
