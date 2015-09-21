@@ -20,12 +20,15 @@
     <div class="well">
       <%= @position.description %>
     </div>
+    <h4>Updates</h4>
+    <div class="well">
+      <%= @position.updates %>
+    </div>
     <% @position.pictures.each do |p| %>
       <%= image_tag p.image(:original), style: "width:50%;height:50%" %>
     <% end %>
   </div>
 </div>
-
 
 <%= link_to 'Edit', edit_position_path(@position), class: "btn btn-warning" %>
 <%= link_to 'Back', positions_path, class: "btn btn-default" %>

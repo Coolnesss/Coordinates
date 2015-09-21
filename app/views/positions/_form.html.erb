@@ -47,6 +47,11 @@
   </div>
 
   <div class="field">
+    <%= f.label :updates %><br>
+    <%= f.text_area :updates %>
+  </div>
+
+  <div class="field">
     <%= f.label :category %><br>
     <%= f.select(:category, options_from_collection_for_select(Position.categories, :first, :first),  { :class => 'dropdown-menu' }) %>
   </div>

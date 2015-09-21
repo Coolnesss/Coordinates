@@ -50,6 +50,16 @@ describe "Positions API" do
       expect(body).to include('"votes"=>0')
     end
 
+    it "includes updates" do
+      FactoryGirl.create :position
+      get "/positions", {}, { "Accept" => "application/json" }
+
+      body = JSON.parse(response.body).to_s
+
+      expect(body).to include('"updates"')
+
+    end
+
     it "can vote" do
       FactoryGirl.create :position
       get "/positions/1/vote", {}, { "Accept" => "application/json" }
