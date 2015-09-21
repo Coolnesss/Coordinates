@@ -35,7 +35,8 @@ class PositionsController < ApplicationController
           votes: position.votes,
           date: position.date_format,
           images: position.picture_urls,
-          category: position[:category]
+          category: position[:category],
+          updates: position.updates
         }
       }
 
@@ -114,6 +115,6 @@ class PositionsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def position_params
-      params.require(:position).permit(:category, :fb_id, :lon, :lat, :name, :description, :email, pictures: [:image])
+      params.require(:position).permit(:updates, :category, :fb_id, :lon, :lat, :name, :description, :email, pictures: [:image])
     end
 end

@@ -47,6 +47,15 @@ describe Position do
 
   end
 
+  it "can add updates" do
+    position = position = FactoryGirl.create(:position)
+    position.updates = "This place is awful"
+    position.save
+
+    expect(position).to be_valid
+    expect(Position.count).to eq(1)
+  end
+
   it "will save a float latitude" do
     position = FactoryGirl.create(:position, lat: 8436068.06177812)
 
