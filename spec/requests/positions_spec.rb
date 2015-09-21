@@ -71,7 +71,7 @@ describe "Positions API" do
       get "/positions", {}, { "Accept" => "application/json" }
 
       expect(body).to include("category")
-      expect(body).to include("poikkeusreitti")
+      expect(body).to include("Talvikunnossapito, Lumikasa väylällä")
 
     end
   end

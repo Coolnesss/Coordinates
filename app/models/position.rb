@@ -3,7 +3,26 @@ class Position < ActiveRecord::Base
   has_many :reports, dependent: :destroy
   has_many :pictures, :dependent => :destroy
 
-  enum category: [ :talvikunnossapito, :poikkeusreitti ]
+  enum category: {
+    #Migraatio mis muutat integerin stringiks tän categoryn arvoilla
+    huonovayla: "Kunnossapito, Huonokuntoinen väylä",
+    korkeareuna: "Kunnossapito, Korkea reunakivi",
+    opastekp: "Kunnossapito, Opaste tai liikennemerkki",
+    kunnossapito: "Kunnossapito, Muu",
+    vaylajatkuvuus: "Suunnittelu, Väylän jatkuvuus",
+    selkeys: "Suunnittelu, Reitin selkeys",
+    suunnittelu: "Suunnittelu, Muu",
+    epaselvaopaste: "Poikkeusjärjestely, Epäselvät opasteet",
+    huonojarj: "Poikkeusjärjestely, Huono järjestely",
+    poikkeusmuu: "Poikkeusjärjestely, Muu",
+    eiauraus: "Talvikunnossapito, Väylää ei ole aurattu",
+    lumikasa: "Talvikunnossapito, Lumikasa väylällä",
+    huonoauraus: "Talvikunnossapito, Aurattu huonosti",
+    polanne: "Talvikunnossapito, Väylällä polanteita",
+    liukas: "Talvikunnossapito, Liukas väylä",
+    sepeli: "Talvikunnossapito, Liikaa sepeliä",
+    talvikpmuu: "Talvikunnossapito, Muu"
+  }
 
   validates :email, email: true, allow_nil: true
   validates :name, :description, :lon, :lat, presence: true

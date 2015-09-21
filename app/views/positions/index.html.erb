@@ -1,7 +1,7 @@
 <h1>Listing Positions</h1>
 
 
-<div class="col-md-10 col-md-offset-1">
+<div class="col-md-12">
 <table class="table table-hover">
   <thead>
     <tr>
@@ -20,7 +20,7 @@
   <tbody>
     <% @positions.each do |position| %>
       <tr>
-        <td><span class="label label-<%= category_label(position.category) %>"><%= position.category %></span></td>
+        <td><span class="label label-default"><%= position[:category] %></span></td>
         <% if position.name.empty? %>
           <td><%= link_to 'No name', position %></td>
         <% else %>
