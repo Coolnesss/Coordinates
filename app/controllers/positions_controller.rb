@@ -35,7 +35,7 @@ class PositionsController < ApplicationController
           votes: position.votes,
           date: position.date_format,
           images: position.picture_urls,
-          category: position.category
+          category: position[:category]
         }
       }
 

@@ -39,7 +39,7 @@ describe "Position" do
 
     visit positions_path
     expect(page).to have_css('span.label')
-    expect(page).to have_css('span.label-success')
+    expect(page).to have_css('span.label-default')
   end
 
 end
