@@ -62,4 +62,14 @@ describe "Report" do
     expect(page).to have_css('span.label-success')
   end
 
+  it "can edit report" do
+    FactoryGirl.create(:report)
+    visit edit_report_path(1)
+
+    fill_in("Description", with: "New description with new stuff")
+    click_button("Update Report")
+
+    expect(page).to have_content("successfully")
+    expect(Report.first.description).to eq("New description with new stuff")
+  end
 end
