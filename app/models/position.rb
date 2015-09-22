@@ -40,6 +40,31 @@ class Position < ActiveRecord::Base
     date.day.to_s + "." + date.month.to_s + "." + date.year.to_s
   end
 
+  def self.geopoints
+    points = Array.new
+
+    Position.all.order(:name).each do |position|
+      points << {
+        type: 'Feature',
+        geometry: {
+          type: 'Point',
+          coordinates: [position.lon, position.lat]
+        },
+        properties: {
+          id: position.id,
+          name: position.name,
+          description: position.description,
+          votes: position.votes,
+          date: position.date_format,
+          images: position.picture_urls,
+          category: position[:category],
+          updates: position.updates
+        }
+      }
+    end
+    points
+  end
+
   def picture_urls
     if self.pictures.empty? then
       return nil
