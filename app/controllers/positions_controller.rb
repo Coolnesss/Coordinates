@@ -16,32 +16,12 @@ class PositionsController < ApplicationController
     @positions = Position.all.order(:name)
     @geojson = Array.new
 
-    @points = Array.new
+    @points = Position.geopoints
     @geojson << {
         type: 'FeatureCollection',
         features: @points
-      }
-    @positions.each do |position|
-      @points << {
-        type: 'Feature',
-        geometry: {
-          type: 'Point',
-          coordinates: [position.lon, position.lat]
-        },
-        properties: {
-          id: position.id,
-          name: position.name,
-          description: position.description,
-          votes: position.votes,
-          date: position.date_format,
-          images: position.picture_urls,
-          category: position[:category],
-          updates: position.updates
-        }
-      }
+    }
 
-
-    end
     respond_to do |format|
       format.html
       format.json { render json: @geojson }  # respond with the created JSON object
@@ -66,14 +46,9 @@ class PositionsController < ApplicationController
   # POST /positions.json
   def create
     @position = Position.new(position_params)
-
     respond_to do |format|
       if @position.save
-        if params[:images]
-          params[:images].each { |image|
-            @position.pictures.create(image: image)
-          }
-        end
+        @position.create_images(params[:images]) unless not params[:images]
         format.html { redirect_to @position, notice: 'Position was successfully created.' }
         format.json { render :show, status: :created, location: @position }
       else
