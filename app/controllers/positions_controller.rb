@@ -46,14 +46,9 @@ class PositionsController < ApplicationController
   # POST /positions.json
   def create
     @position = Position.new(position_params)
-
     respond_to do |format|
       if @position.save
-        if params[:images]
-          params[:images].each { |image|
-            @position.pictures.create(image: image)
-          }
-        end
+        @position.create_images(params[:images]) unless not params[:images]
         format.html { redirect_to @position, notice: 'Position was successfully created.' }
         format.json { render :show, status: :created, location: @position }
       else

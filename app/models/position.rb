@@ -40,6 +40,12 @@ class Position < ActiveRecord::Base
     date.day.to_s + "." + date.month.to_s + "." + date.year.to_s
   end
 
+  def create_images(images)
+    images.each { |image|
+      self.pictures.create(image: image)
+    }
+  end
+
   def self.geopoints
     points = Array.new
 
