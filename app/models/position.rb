@@ -1,10 +1,9 @@
 class Position < ActiveRecord::Base
 
   has_many :reports, dependent: :destroy
-  has_many :pictures, :dependent => :destroy
+  has_many :pictures, dependent: :destroy
 
   enum category: {
-    #Migraatio mis muutat integerin stringiks tän categoryn arvoilla
     huonovayla: "Kunnossapito, Huonokuntoinen väylä",
     korkeareuna: "Kunnossapito, Korkea reunakivi",
     opastekp: "Kunnossapito, Opaste tai liikennemerkki",
@@ -80,6 +79,13 @@ class Position < ActiveRecord::Base
       urls << p.image.url
     end
     urls
+  end
+
+
+  #Makes a POST request to Helsinki issue reporting API
+  def send_feedback
+
+
   end
 
 end

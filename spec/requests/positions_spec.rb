@@ -84,6 +84,18 @@ describe "Positions API" do
       expect(body).to include("Talvikunnossapito, Lumikasa väylällä")
 
     end
+
+    it "a visitor has a browser that supports compression" do
+      ['deflate', 'gzip', 'deflate,gzip', 'gzip,deflate'].each do |compression_method|
+        get '/positions', {}, {'HTTP_ACCEPT_ENCODING' => compression_method, "Accept" => "application/json" }
+        expect(response.headers['Content-Encoding']).to be
+      end
+    end
+
+    it "a visitor's browser does not support compression" do
+      get '/positions'
+      expect(response.headers['Content-Encoding']).to_not be
+    end
   end
 
   describe "POST /positions" do
