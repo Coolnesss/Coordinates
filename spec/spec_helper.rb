@@ -17,6 +17,7 @@
 require "codeclimate-test-reporter"
 CodeClimate::TestReporter.start
 require "paperclip/matchers"
+require 'webmock/rspec'
 
 RSpec.configure do |config|
   # rspec-expectations config goes here. You can use an alternate
@@ -26,7 +27,34 @@ RSpec.configure do |config|
     FileUtils.rm_rf(Dir["#{Rails.root}/spec/test_files/"])
   end
 
+
+  config.before(:each) do
+    @requests = File.read("spec/fixtures/requests.json").to_json
+    @resp = File.read("spec/fixtures/servicerequest.json").to_json
+
+    stub_request(:get, "http://dev.hel.fi:9002/open311-test/v1/requests.json")
+    .to_return(
+     :body => @requests,
+     :status => 200, :headers => {})
+
+    stub_request(:any, /.*requests.json/)
+    .to_return(
+     :body => @resp,
+     :status => 200, :headers => {})
+
+    #stub_request(:get, ENV['HEL_URL']+"requests.json").
+    #  with(:headers => {'Accept'=>'application/json', 'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3', 'Api-Key'=>'f1301b1ded935eabc5faa6a2ce975f6', 'User-Agent'=>'Ruby'}).
+    #    to_return(status: 200, body: JSON.parse(File.read("spec/support/fixtures/requests.json").to_json, quirks_mode: true), headers: {})
+
+    #stub_request(:get, ENV['HEL_URL']+"requests/8fmht6g1470b3qk8pthg.json").
+    #  with(:headers => {'Accept'=>'application/json', 'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3', 'Api-Key'=>'f1301b1ded935eabc5faa6a2ce975f6', 'User-Agent'=>'Ruby'}).
+    #    to_return(status: 200, body: JSON.parse(File.read("spec/support/fixtures/servicerequest.json").to_json, quirks_mode: true), headers: {})
+
+  end
+
   config.include Paperclip::Shoulda::Matchers
+
+  WebMock.disable_net_connect!(allow_localhost: true)
 
 
   config.expect_with :rspec do |expectations|

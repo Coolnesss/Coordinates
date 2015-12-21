@@ -1,0 +1,56 @@
+[
+
+{
+
+    "service_request_id": "8fmht6g1470b3qk8pthg",
+    "service_code": "171",
+    "description": "Itäkeskuksen uimahallin edessä kadulla on monttuja ajotiessä. \n\nLisätietoa: http://metro.fi/paakaupunkiseutu/fiksaus/monttu_tiessa.4/",
+    "requested_datetime": "2013-05-02T11:02:07+03:00",
+    "updated_datetime": "2013-05-15T08:55:09+03:00",
+    "status": "closed",
+    "status_notes": "Kiitos ilmoituksestanne. Olemme välittäneet korjauspyynnön alueen katujen kunnossapitoon.\nTerveisin\nRakennusviraston asiakaspalvelu\n",
+    "agency_responsible": "Rakennusvirasto",
+    "service_name": "Potholes",
+    "lat": ​60.2126363,
+    "long": ​25.0770902,
+    "extended_attributes":
+
+{
+
+    "title": "Monttu tiessä",
+    "tasks":
+
+[
+
+{
+
+    "task_created": "2013-05-02T11:02:07+03:00",
+    "task_modified": "2013-05-03T14:41:25+03:00",
+    "owner_name": "Rakennusvirasto",
+    "task_type": "assigned",
+    "task_state": "re_assigned"
+
+},
+{
+
+    "task_created": "2013-05-03T14:41:25+03:00",
+    "task_modified": "2013-05-03T14:42:22+03:00",
+    "owner_name": "Rakennusvirasto",
+    "task_type": "wait_for_answer",
+    "task_state": "completed"
+
+},
+
+                {
+                    "task_created": "2013-05-03T14:41:58+03:00",
+                    "task_modified": "2013-05-03T14:42:22+03:00",
+                    "owner_name": "Rakennusvirasto",
+                    "task_type": "wait_for_answer",
+                    "task_state": "closed"
+                }
+            ],
+            "detailed_status": "PROCESSED,PUBLIC_WORKS_COMPLETED"
+        }
+    }
+
+]
