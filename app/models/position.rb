@@ -1,7 +1,7 @@
 class Position < ActiveRecord::Base
 
   has_many :reports, dependent: :destroy
-  has_many :pictures, :dependent => :destroy
+  has_many :pictures, dependent: :destroy
 
   enum category: {
     #Migraatio mis muutat integerin stringiks tän categoryn arvoilla
@@ -30,6 +30,7 @@ class Position < ActiveRecord::Base
   validates :description, length: { minimum: 15, maximum: 270 }
   validates_numericality_of :lon
   validates_numericality_of :lat
+  validates :category, presence: true
 
 
   accepts_nested_attributes_for :pictures#, :reject_if => lambda { |t| t['picture'].nil? }

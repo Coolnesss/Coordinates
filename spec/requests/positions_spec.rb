@@ -84,18 +84,28 @@ describe "Positions API" do
       expect(body).to include("Talvikunnossapito, Lumikasa väylällä")
 
     end
+
+    it "a visitor has a browser that supports compression" do
+      ['deflate', 'gzip', 'deflate,gzip', 'gzip,deflate'].each do |compression_method|
+        get '/positions', {}, {'HTTP_ACCEPT_ENCODING' => compression_method, "Accept" => "application/json" }
+        expect(response.headers['Content-Encoding']).to be
+      end
+    end
+
+    it "a visitor's browser does not support compression" do
+      get '/positions'
+      expect(response.headers['Content-Encoding']).to_not be
+    end
   end
 
   describe "POST /positions" do
     it "doesnt save a position with string coordinates" do
+      attributes = FactoryGirl.attributes_for(:position)
+      attributes["lon"] = "asd"
+      attributes["lat"] = "lol"
+
       json = { :format => 'json',
-        :position => {
-          :name => "foo",
-          :description => "The best place on earth",
-          :lon => "asd",
-          :lat => "asd",
-          :email => "lol@chang.fi"
-        }
+        :position => attributes
       }
       post "/positions.json", json
 
@@ -103,41 +113,44 @@ describe "Positions API" do
     end
 
     it "saves a position with multiple parameters" do
+      attributes = FactoryGirl.attributes_for(:position)
+
       json = { :format => 'json',
-        :position => {
-          :name => "foo",
-          :description => "The best place on earth",
-          :lon => 123,
-          :lat => 123,
-          :email => "lol@chang.fi"
-        }
+        :position => attributes
       }
       post "/positions.json", json
 
       expect(Position.count).to eq(1)
-      expect(Position.first.lon).to eq(123)
     end
 
     it "doesnt save a position with faulty parameters" do
+
       json = { :format => 'json',
-        :america => {
-          :bad => "foo"
-        }
+        :position => ""
       }
       post "/positions.json", json
 
       expect(Position.count).to eq(0)
     end
 
-    it "doesnt save a position with a too long name" do
+    it "doesn't save a posiiton without a category" do
+      attributes = FactoryGirl.attributes_for :position
+      attributes["category"] = nil
+
       json = { :format => 'json',
-        :position => {
-          :name => "reallylongsuperlongamericalongname",
-          :description => "The best place on earth",
-          :lon => 1,
-          :lat => 1,
-          :email => "lol@chang.fi"
-        }
+        :position => attributes
+      }
+      post "/positions.json", json
+
+      expect(Position.count).to eq(0)
+
+    end
+
+    it "doesnt save a position with a too long name" do
+      attributes = FactoryGirl.attributes_for(:position)
+      attributes["name"] = "reallylongsuperlongamericalongname"
+      json = { :format => 'json',
+        :position => attributes
       }
       post "/positions.json", json
 

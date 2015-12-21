@@ -32,6 +32,7 @@ module Coordinates
     # Do not swallow errors in after_commit/after_rollback callbacks.
     config.active_record.raise_in_transactional_callbacks = true
 
+    config.middleware.use Rack::Deflater
     config.middleware.use Rack::Attack
     config.middleware.use Rack::JSONP
     config.middleware.use Rack::Cors do
