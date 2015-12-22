@@ -17,6 +17,7 @@
 require "codeclimate-test-reporter"
 CodeClimate::TestReporter.start
 require "paperclip/matchers"
+require 'webmock/rspec'
 
 RSpec.configure do |config|
   # rspec-expectations config goes here. You can use an alternate

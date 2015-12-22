@@ -7,13 +7,11 @@ class IssueReporter
     JSON.parse(RestClient.get @url)
   end
 
-
   def self.delete(pos_id)
-    RestClient.log = 'stdout'
+    #RestClient.log = 'stdout'
   end
 
   def self.send(pos_id)
-    RestClient.log = 'stdout'
     position = Position.find(pos_id)
 
     resp = RestClient.post(@url+".json", {
@@ -29,8 +27,7 @@ class IssueReporter
       accept: :json
     })
 
-    service_request = JSON.parse(resp.to_str, object_class: OpenStruct)
-    puts service_request
+    ActiveSupport::JSON.decode(resp.to_str)
   end
   private
 
@@ -40,6 +37,6 @@ class IssueReporter
 
   def self.find(id)
     resp = RestClient.get @url+"/#{id}.json"
-    JSON.parse(resp.to_str)
+    ActiveSupport::JSON.decode(resp.to_str)
   end
 end

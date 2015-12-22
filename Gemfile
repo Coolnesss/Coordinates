@@ -65,6 +65,7 @@ group :development, :test do
   gem 'spring'
   gem "better_errors"
   gem 'rspec-rails', '~> 3.0'
+  gem 'webmock'
 end
 
 group :development do
