@@ -33,6 +33,8 @@ gem 'email_validator'
 gem 'bcrypt'
 gem "font-awesome-rails"
 gem 'rest-client'
+gem 'rufus-scheduler'
+
 
 gem 'rack-jsonp-middleware',
   :require => 'rack/jsonp'
@@ -84,7 +86,6 @@ group :test do
   gem 'launchy'
   gem 'simplecov','~> 0.7', require: false
   gem 'rspec-its'
-  #gem 'webmock'
   gem 'selenium-webdriver'
   gem 'database_cleaner'
   gem "codeclimate-test-reporter", require: nil

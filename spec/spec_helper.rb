@@ -25,6 +25,7 @@ RSpec.configure do |config|
   # assertions if you prefer.
   config.after(:suite) do
     FileUtils.rm_rf(Dir["#{Rails.root}/spec/test_files/"])
+    WebMock.disable_net_connect!(allow: 'codeclimate.com')
   end
 
   config.include Paperclip::Shoulda::Matchers

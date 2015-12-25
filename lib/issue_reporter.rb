@@ -31,7 +31,10 @@ class IssueReporter
   end
   private
 
-  def self.update_position
+  def self.update_position(pos_id)
+    position = Position.find(pos_id)
+    info = find(pos_id)
+
 
   end
 
