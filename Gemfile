@@ -53,6 +53,7 @@ gem 'rack-cors',
 group :production do
   gem 'pg'
   gem 'rails_12factor'
+  gem 'rack-attack'
 end
 gem 'sqlite3'
 
@@ -79,7 +80,6 @@ group :development do
 end
 
 gem 'puma'
-gem 'rack-attack'
 group :test do
   gem 'factory_girl_rails'
   gem 'capybara'

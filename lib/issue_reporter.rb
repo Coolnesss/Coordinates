@@ -27,15 +27,20 @@ class IssueReporter
       accept: :json
     })
 
-    ActiveSupport::JSON.decode(resp.to_str)
+    #first because API returns array with one item
+    json = JSON.parse(eval(resp)).first
+    update_position(pos_id, json)
+    json
   end
+
   private
 
-  def self.update_position(pos_id)
+  def self.update_position(pos_id, json)
     position = Position.find(pos_id)
-    info = find(pos_id)
-
-
+    position.issue_id = json["service_request_id"]
+    p position.issue_id + " asd"
+    p json["service_request_id"]
+    position.save unless position.issue_id == nil
   end
 
   def self.find(id)

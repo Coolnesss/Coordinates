@@ -34,7 +34,8 @@ module Coordinates
     config.autoload_paths << Rails.root.join('lib')
 
     config.middleware.use Rack::Deflater
-    config.middleware.use Rack::Attack
+    #Messes with tests so not running when not in production
+    config.middleware.use Rack::Attack unless not Rails.env.production?
     config.middleware.use Rack::JSONP
     config.middleware.use Rack::Cors do
       allow do

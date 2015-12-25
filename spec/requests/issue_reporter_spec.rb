@@ -25,11 +25,20 @@ describe "Helsinki API" do
   end
 
   describe "POST /requests.json" do
-    it "Can send a valid issue report from a position" do
-      position = FactoryGirl.create(:position)
-      response = IssueReporter.send(position.id)
 
-      expect(response).to include('service_request_id')
+    it "can send a valid issue report for a position" do
+      position = FactoryGirl.create(:position)
+
+      expect(IssueReporter.send(position.id)).to include('service_request_id')
     end
+
+    it "saves the service_request_id into the database when sending" do
+      position = FactoryGirl.create(:position)
+      resp = IssueReporter.send(position.id)
+
+      id = resp["service_request_id"]
+      expect(Position.first.issue_id).to eq(id)
+    end
+
   end
 end
