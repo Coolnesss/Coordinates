@@ -4,7 +4,6 @@ class Position < ActiveRecord::Base
   has_many :pictures, dependent: :destroy
 
   enum category: {
-    #Migraatio mis muutat integerin stringiks tän categoryn arvoilla
     huonovayla: "Kunnossapito, Huonokuntoinen väylä",
     korkeareuna: "Kunnossapito, Korkea reunakivi",
     opastekp: "Kunnossapito, Opaste tai liikennemerkki",
@@ -83,4 +82,35 @@ class Position < ActiveRecord::Base
     urls
   end
 
+  def self.service_codes
+    codes = Hash.new
+
+    codes[171] = Array.new
+    codes[171] << :huonovayla
+    codes[171] << :korkeareuna
+    codes[171] << :kunnossapito
+    codes[171] << :eiauraus
+    codes[171] << :lumikasa
+    codes[171] << :huonoauraus
+    codes[171] << :polanne
+    codes[171] << :liukas
+    codes[171] << :sepeli
+    codes[171] << :talvikpmuu
+
+    codes[198] = Array.new
+    codes[198] << :opastekp
+
+    codes[180] = Array.new
+    Position.categories.each do |symbol, description|
+      symbol = symbol.to_sym
+      codes[180] << symbol unless (codes[171].include? symbol or codes[198].include? symbol)
+    end
+    codes
+  end
+
+  def deduce_service_code()
+    Position.service_codes.each do |code, cats|
+      return code unless not cats.include? self.category.to_sym
+    end
+  end
 end

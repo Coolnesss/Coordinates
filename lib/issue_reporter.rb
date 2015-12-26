@@ -16,7 +16,7 @@ class IssueReporter
 
     resp = RestClient.post(@url+".json", {
       api_key: ENV["HEL_API_KEY"],
-      service_code: 171,
+      service_code: position.deduce_service_code,
       description: position.description,
       title: position.name,
       lat: position.lat,
@@ -38,8 +38,6 @@ class IssueReporter
   def self.update_position(pos_id, json)
     position = Position.find(pos_id)
     position.issue_id = json["service_request_id"]
-    p position.issue_id + " asd"
-    p json["service_request_id"]
     position.save unless position.issue_id == nil
   end
 

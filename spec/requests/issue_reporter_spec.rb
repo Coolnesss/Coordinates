@@ -39,6 +39,5 @@ describe "Helsinki API" do
       id = resp["service_request_id"]
       expect(Position.first.issue_id).to eq(id)
     end
-
   end
 end

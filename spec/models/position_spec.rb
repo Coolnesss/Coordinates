@@ -120,4 +120,17 @@ describe Position do
     expect(Position.count).to eq(0)
   end
 
+  it "returns the hash of service codes correctly" do
+    codes = Position.service_codes
+    expect(codes[171]).to include(:huonovayla)
+    expect(codes[198]).to include(:opastekp)
+    expect(codes[180]).not_to include(:kunnossapito)
+  end
+
+  it "deduces service codes correctly" do
+    position = FactoryGirl.create :position
+    code = position.deduce_service_code
+    expect(code).to eq 171
+  end
+
 end
