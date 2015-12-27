@@ -85,6 +85,10 @@ class Position < ActiveRecord::Base
     urls
   end
 
+  def one_picture_url
+    self.pictures.first.image.url unless self.pictures.empty?
+  end
+
   def self.service_codes
     codes = Hash.new
     codes[171] = [:huonovayla, :korkeareuna, :kunnossapito, :eiauraus,
@@ -113,5 +117,4 @@ class Position < ActiveRecord::Base
     resp = IssueReporter.find self.issue_id
     resp["detailed_status"] unless not resp.present?
   end
-
 end

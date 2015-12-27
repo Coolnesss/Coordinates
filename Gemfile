@@ -71,7 +71,6 @@ group :development, :test do
   gem 'spring'
   gem "better_errors"
   gem 'rspec-rails', '~> 3.0'
-  gem 'webmock'
 end
 
 group :development do
@@ -84,6 +83,7 @@ end
 
 gem 'puma'
 group :test do
+  gem 'webmock'
   gem 'factory_girl_rails'
   gem 'capybara'
   gem 'launchy'

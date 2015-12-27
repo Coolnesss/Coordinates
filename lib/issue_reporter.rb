@@ -17,7 +17,8 @@ class IssueReporter
       title: position.name,
       lat: position.lat,
       long: position.lon,
-      email: position.email
+      email: position.email,
+      media_url: position.one_picture_url
     }, {
       content_type: :json,
       accept: :json
