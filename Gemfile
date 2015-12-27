@@ -32,7 +32,9 @@ gem 'aws-sdk', '< 2.0'
 gem 'email_validator'
 gem 'bcrypt'
 gem "font-awesome-rails"
-#gem 'figaro'
+gem 'rest-client'
+gem 'rufus-scheduler'
+
 
 gem 'rack-jsonp-middleware',
   :require => 'rack/jsonp'
@@ -51,8 +53,12 @@ gem 'rack-cors',
 group :production do
   gem 'pg'
   gem 'rails_12factor'
+  gem 'rack-attack'
 end
 gem 'sqlite3'
+gem 'rest-client-components'
+gem 'rack-cache'
+
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -76,14 +82,13 @@ group :development do
 end
 
 gem 'puma'
-gem 'rack-attack'
 group :test do
+  gem 'webmock'
   gem 'factory_girl_rails'
   gem 'capybara'
   gem 'launchy'
   gem 'simplecov','~> 0.7', require: false
   gem 'rspec-its'
-  #gem 'webmock'
   gem 'selenium-webdriver'
   gem 'database_cleaner'
   gem "codeclimate-test-reporter", require: nil

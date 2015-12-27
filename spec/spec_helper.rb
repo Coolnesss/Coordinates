@@ -17,6 +17,7 @@
 require "codeclimate-test-reporter"
 CodeClimate::TestReporter.start
 require "paperclip/matchers"
+require 'webmock/rspec'
 
 RSpec.configure do |config|
   # rspec-expectations config goes here. You can use an alternate
@@ -24,6 +25,7 @@ RSpec.configure do |config|
   # assertions if you prefer.
   config.after(:suite) do
     FileUtils.rm_rf(Dir["#{Rails.root}/spec/test_files/"])
+    WebMock.disable_net_connect!(allow: 'codeclimate.com')
   end
 
   config.include Paperclip::Shoulda::Matchers

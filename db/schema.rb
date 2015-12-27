@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150921155805) do
+ActiveRecord::Schema.define(version: 20151222205648) do
 
   create_table "pictures", force: :cascade do |t|
     t.integer  "position_id"
@@ -39,6 +39,7 @@ ActiveRecord::Schema.define(version: 20150921155805) do
     t.string   "fb_id"
     t.string   "category"
     t.text     "updates"
+    t.string   "issue_id"
   end
 
   create_table "reports", force: :cascade do |t|

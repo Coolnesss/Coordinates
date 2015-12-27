@@ -1,6 +1,8 @@
 require File.expand_path('../boot', __FILE__)
 
 require 'rails/all'
+require 'restclient/components'
+require 'rack/cache'
 
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
@@ -21,7 +23,8 @@ module Coordinates
     # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     # config.i18n.default_locale = :de
-
+    RestClient.enable Rack::Cache
+    
     config.before_configuration do
       env_file = File.join(Rails.root, 'config', 'local_env.yml')
       YAML.load(File.open(env_file)).each do |key, value|
@@ -31,9 +34,11 @@ module Coordinates
 
     # Do not swallow errors in after_commit/after_rollback callbacks.
     config.active_record.raise_in_transactional_callbacks = true
+    config.autoload_paths << Rails.root.join('lib')
 
     config.middleware.use Rack::Deflater
-    config.middleware.use Rack::Attack
+    #Messes with tests so not running when not in production
+    config.middleware.use Rack::Attack unless not Rails.env.production?
     config.middleware.use Rack::JSONP
     config.middleware.use Rack::Cors do
       allow do

@@ -1,3 +1,5 @@
+#This messes with development when running a lot of tests, so only enabled in production
+if Rails.env.production? then
 class Rack::Attack
 
   ### Configure Cache ###
@@ -74,4 +76,5 @@ class Rack::Attack
   #    {},   # headers
   #    ['']] # body
   # end
+end
 end
