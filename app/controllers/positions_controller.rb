@@ -4,6 +4,9 @@ class PositionsController < ApplicationController
 
   def vote
     @position.increment!(:votes)
+    if (@position.votes > 2) then
+      IssueReporter.send(@position.id)
+    end
     respond_to do |format|
       format.html { redirect_to root_path }
       format.json { render json: @position.votes }

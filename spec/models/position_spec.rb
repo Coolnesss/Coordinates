@@ -142,9 +142,8 @@ describe Position do
     position = FactoryGirl.create :position
     position.issue_id = "8fmht6g1470b3qk8pthg"
     position.save
-
-    expect(position.find_status).not_to be_nil
-    expect(position.find_status).to eq("open")
+    expect(Position.first.find_status).not_to be_nil
+    expect(Position.first.find_status).to eq("open")
 
   end
 end

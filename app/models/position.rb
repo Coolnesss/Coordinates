@@ -65,8 +65,8 @@ class Position < ActiveRecord::Base
           images: position.picture_urls,
           category: position[:category],
           updates: position.updates,
-          status: nil, #TODO
-          detailed_status: nil, #TODO
+          status: position.find_status, #TODO
+          detailed_status: position.find_detailed_status, #TODO
           issue_id: position.issue_id
         }
       }
@@ -110,11 +110,11 @@ class Position < ActiveRecord::Base
 
   def find_status()
     resp = IssueReporter.find self.issue_id
-    resp["status"] unless not resp.present?
+    resp["status"] unless not resp or not resp["status"].present?
   end
 
   def find_detailed_status()
     resp = IssueReporter.find self.issue_id
-    resp["detailed_status"] unless not resp.present?
+    resp["extended_attributes"]["detailed_status"] unless not resp or not resp["extended_attributes"].present?
   end
 end
