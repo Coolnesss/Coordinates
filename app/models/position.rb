@@ -65,8 +65,8 @@ class Position < ActiveRecord::Base
           images: position.picture_urls,
           category: position[:category],
           updates: position.updates,
-          status: position.find_status, #TODO
-          detailed_status: position.find_detailed_status, #TODO
+          status: nil, #TODO
+          detailed_status: nil, #TODO
           issue_id: position.issue_id
         }
       }
