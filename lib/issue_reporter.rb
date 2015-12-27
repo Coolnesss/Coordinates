@@ -7,10 +7,6 @@ class IssueReporter
     JSON.parse(RestClient.get @url)
   end
 
-  def self.delete(pos_id)
-    #RestClient.log = 'stdout'
-  end
-
   def self.send(pos_id)
     position = Position.find(pos_id)
 
@@ -28,7 +24,7 @@ class IssueReporter
     })
 
     #first because API returns array with one item
-    json = JSON.parse(eval(resp)).first
+    json = JSON.parse(resp).first
     update_position(pos_id, json)
     json
   end
@@ -36,13 +32,14 @@ class IssueReporter
   private
 
   def self.update_position(pos_id, json)
-    position = Position.find(pos_id)
+    position = Position.find pos_id
     position.issue_id = json["service_request_id"]
     position.save unless position.issue_id == nil
   end
 
   def self.find(id)
+    return nil unless id != nil
     resp = RestClient.get @url+"/#{id}.json"
-    ActiveSupport::JSON.decode(resp.to_str)
+    JSON.parse(resp).first
   end
 end

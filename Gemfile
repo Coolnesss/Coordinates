@@ -56,6 +56,9 @@ group :production do
   gem 'rack-attack'
 end
 gem 'sqlite3'
+gem 'rest-client-components'
+gem 'rack-cache'
+
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

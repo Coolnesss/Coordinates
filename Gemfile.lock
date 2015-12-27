@@ -166,6 +166,8 @@ GEM
     rack (1.6.4)
     rack-attack (4.3.0)
       rack
+    rack-cache (1.5.1)
+      rack (>= 0.4)
     rack-cors (0.4.0)
     rack-jsonp-middleware (0.0.10)
       rack
@@ -206,6 +208,9 @@ GEM
       http-cookie (>= 1.0.2, < 2.0)
       mime-types (>= 1.16, < 3.0)
       netrc (~> 0.7)
+    rest-client-components (1.4.0)
+      rack (>= 1.0.1)
+      rest-client (>= 1.6.0)
     rspec-core (3.3.2)
       rspec-support (~> 3.3.0)
     rspec-expectations (3.3.1)
@@ -313,11 +318,13 @@ DEPENDENCIES
   pg
   puma
   rack-attack
+  rack-cache
   rack-cors
   rack-jsonp-middleware
   rails (~> 4.2.2)
   rails_12factor
   rest-client
+  rest-client-components
   rspec-its
   rspec-rails (~> 3.0)
   rufus-scheduler

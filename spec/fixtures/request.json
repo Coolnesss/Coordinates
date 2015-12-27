@@ -1,16 +1,16 @@
 [
-    {
-        "service_request_id": "bba4074833f201433c6af954eace80ccab468761",
-        "service_code": "171",
-        "lat": ​60.168321,
-        "long": ​24.952397,
-        "address": "Unioninkatu 25, Helsinki",
-        "zipcode": "",
-        "description": "Testipalaute. Ei tarvitse vastata.",
-        "status": "open",
-        "status_notes": "",
-        "media_url": "http://dev.hel.fi/open311-test/v1/data/ef245a9607b2c4a65e40da6d6528aa5a47fda501",
-        "requested_datetime": "2015-05-29T15:56:54+03:00",
-        "updated_datetime": "2015-05-29T15:56:54+03:00"
-    }
+{
+"service_request_id":"bba4074833f201433c6af954eace80ccab468761",
+"service_code":"171",
+"lat":60.168321,
+"long":24.952397,
+"address":"Unioninkatu 25, Helsinki",
+"zipcode":"",
+"description":"Testipalaute. Ei tarvitse vastata.",
+"status":"open",
+"status_notes":"",
+"media_url":"http://dev.hel.fi/open311-test/v1/data/ef245a9607b2c4a65e40da6d6528aa5a47fda501",
+"requested_datetime":"2015-05-29T15:56:54+03:00",
+"updated_datetime":"2015-05-29T15:56:54+03:00"
+}
 ]

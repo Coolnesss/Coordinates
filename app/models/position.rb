@@ -64,7 +64,9 @@ class Position < ActiveRecord::Base
           date: position.date_format,
           images: position.picture_urls,
           category: position[:category],
-          updates: position.updates
+          updates: position.updates,
+          status: position.find_status, #TODO
+          detailed_status: position.find_detailed_status #TODO
         }
       }
     end
@@ -84,22 +86,9 @@ class Position < ActiveRecord::Base
 
   def self.service_codes
     codes = Hash.new
-
-    codes[171] = Array.new
-    codes[171] << :huonovayla
-    codes[171] << :korkeareuna
-    codes[171] << :kunnossapito
-    codes[171] << :eiauraus
-    codes[171] << :lumikasa
-    codes[171] << :huonoauraus
-    codes[171] << :polanne
-    codes[171] << :liukas
-    codes[171] << :sepeli
-    codes[171] << :talvikpmuu
-
-    codes[198] = Array.new
-    codes[198] << :opastekp
-
+    codes[171] = [:huonovayla, :korkeareuna, :kunnossapito, :eiauraus,
+      :lumikasa, :huonoauraus, :polanne, :liukas, :sepeli, :talvikpmuu]
+    codes[198] = [:opastekp]
     codes[180] = Array.new
     Position.categories.each do |symbol, description|
       symbol = symbol.to_sym
@@ -113,4 +102,15 @@ class Position < ActiveRecord::Base
       return code unless not cats.include? self.category.to_sym
     end
   end
+
+  def find_status()
+    resp = IssueReporter.find self.issue_id
+    resp["status"] unless not resp.present?
+  end
+
+  def find_detailed_status()
+    resp = IssueReporter.find self.issue_id
+    resp["detailed_status"] unless not resp.present?
+  end
+
 end
