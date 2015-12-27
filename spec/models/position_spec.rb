@@ -135,8 +135,7 @@ describe Position do
   end
 
   it "find status from API" do
-    stub_request(:get, "http://dev.hel.fi:9002/open311-test/v1/requests/8fmht6g1470b3qk8pthg.json").
-         with(:headers => {'Accept'=>'*/*; q=0.5, application/xml', 'Accept-Encoding'=>'gzip, deflate', 'User-Agent'=>'Ruby'}).
+    stub_request(:get, /.*8fmht6g1470b3qk8pthg.json.*/).
          to_return(:status => 200, :body => IO.read("spec/fixtures/request.json"), :headers => {})
 
 
