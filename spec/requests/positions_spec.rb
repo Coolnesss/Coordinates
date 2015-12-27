@@ -85,6 +85,20 @@ describe "Positions API" do
 
     end
 
+    it "has issue_id if one is in database" do
+
+      stub_request(:get, "http://dev.hel.fi:9002/open311-test/v1/requests/fake.json").
+        with(:headers => {'Accept'=>'*/*; q=0.5, application/xml', 'Accept-Encoding'=>'gzip, deflate', 'User-Agent'=>'Ruby'}).
+        to_return(:status => 200, :body => IO.read("spec/fixtures/request.json"), :headers => {})
+
+      position = FactoryGirl.create :position
+      position.issue_id = "fake"
+      position.save
+
+      get "/positions", {}, { "Accept" => "application/json" }
+      expect(body).to include('"issue_id":"fake"')
+    end
+
     it "a visitor has a browser that supports compression" do
       ['deflate', 'gzip', 'deflate,gzip', 'gzip,deflate'].each do |compression_method|
         get '/positions', {}, {'HTTP_ACCEPT_ENCODING' => compression_method, "Accept" => "application/json" }

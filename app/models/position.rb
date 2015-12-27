@@ -66,7 +66,8 @@ class Position < ActiveRecord::Base
           category: position[:category],
           updates: position.updates,
           status: position.find_status, #TODO
-          detailed_status: position.find_detailed_status #TODO
+          detailed_status: position.find_detailed_status, #TODO
+          issue_id: position.issue_id
         }
       }
     end

@@ -1,4 +1,5 @@
 require 'rails_helper'
+require 'webmock/rspec'
 include ActionDispatch::TestProcess
 
 describe Position do
@@ -133,4 +134,18 @@ describe Position do
     expect(code).to eq 171
   end
 
+  it "find status from API" do
+    stub_request(:get, "http://dev.hel.fi:9002/open311-test/v1/requests/8fmht6g1470b3qk8pthg.json").
+         with(:headers => {'Accept'=>'*/*; q=0.5, application/xml', 'Accept-Encoding'=>'gzip, deflate', 'User-Agent'=>'Ruby'}).
+         to_return(:status => 200, :body => IO.read("spec/fixtures/request.json"), :headers => {})
+
+
+    position = FactoryGirl.create :position
+    position.issue_id = "8fmht6g1470b3qk8pthg"
+    position.save
+
+    expect(position.find_status).not_to be_nil
+    expect(position.find_status).to eq("open")
+
+  end
 end
