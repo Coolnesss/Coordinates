@@ -134,7 +134,7 @@ describe Position do
     expect(code).to eq 171
   end
 
-  it "find status from API" do
+  it "finds the status from the API" do
     stub_request(:get, /.*8fmht6g1470b3qk8pthg.json.*/).
          to_return(:status => 200, :body => IO.read("spec/fixtures/request.json"), :headers => {})
 
@@ -146,4 +146,18 @@ describe Position do
     expect(Position.first.find_status).to eq("open")
 
   end
+
+  it "finds the detailed status from the API" do
+    stub_request(:get, /.*8fmht6g1470b3qk8pthg.json.*/).
+         to_return(:status => 200, :body => IO.read("spec/fixtures/request.json"), :headers => {})
+
+       position = FactoryGirl.create :position
+       position.issue_id = "8fmht6g1470b3qk8pthg"
+       position.save
+       
+       expect(Position.first.find_detailed_status).not_to be_nil
+       expect(Position.first.find_detailed_status).to eq("RECEIVED")
+  end
+
+
 end

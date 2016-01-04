@@ -11,6 +11,14 @@
 "status_notes":"",
 "media_url":"http://dev.hel.fi/open311-test/v1/data/ef245a9607b2c4a65e40da6d6528aa5a47fda501",
 "requested_datetime":"2015-05-29T15:56:54+03:00",
-"updated_datetime":"2015-05-29T15:56:54+03:00"
+"updated_datetime":"2015-05-29T15:56:54+03:00",
+"extended_attributes": {
+"title": "",
+"service_object_type": "",
+"service_object_id": "",
+"media_urls": [
+"http://dev.hel.fi/open311-test/v1/data/ef245a9607b2c4a65e40da6d6528aa5a47fda501"],
+"detailed_status": "RECEIVED"
+}
 }
 ]

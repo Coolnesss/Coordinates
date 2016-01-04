@@ -80,6 +80,25 @@ describe "Positions API" do
       allow(IssueReporter).to receive(:send).and_call_original
     end
 
+    it "contains detailed_status and status for positions in API" do
+      stub_request(:get, /.*8fmht6g1470b3qk8pthg.json.*/).
+           to_return(:status => 200, :body => IO.read("spec/fixtures/request.json"), :headers => {})
+
+      position = FactoryGirl.create :position
+      position.issue_id = "8fmht6g1470b3qk8pthg"
+      position.save
+
+      get "/positions", {}, { "Accept" => "application/json" }
+
+      contents = JSON.parse!(body)["features"].first["properties"]
+
+      expect(contents).to include("status")
+      expect(contents).to include("detailed_status")
+
+      expect(contents["status"]).to eq("open")
+      expect(contents["detailed_status"]).to eq("RECEIVED")
+    end
+
     it "doesn't contain fb_id or email" do
       FactoryGirl.create :position
       get "/positions", {}, { "Accept" => "application/json" }

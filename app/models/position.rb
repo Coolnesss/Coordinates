@@ -117,4 +117,12 @@ class Position < ActiveRecord::Base
     resp = IssueReporter.find self.issue_id
     resp["extended_attributes"]["detailed_status"] unless not resp or not resp["extended_attributes"].present?
   end
+
+  def send_to_api
+    if self.votes > 2 then
+      Thread.new {
+        IssueReporter.send(self.id)
+      }
+    end
+  end
 end

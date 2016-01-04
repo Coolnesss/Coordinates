@@ -4,9 +4,7 @@ class PositionsController < ApplicationController
 
   def vote
     @position.increment!(:votes)
-    if (@position.votes > 2) then
-      IssueReporter.send(@position.id)
-    end
+    @position.send_to_api
     respond_to do |format|
       format.html { redirect_to root_path }
       format.json { render json: @position.votes }
@@ -17,10 +15,10 @@ class PositionsController < ApplicationController
   # GET /positions.json
   def index
     @positions = Position.all.order(:name)
-    @geojson = Array.new
+    @geojson = Hash.new
 
     @points = Position.geopoints
-    @geojson << {
+    @geojson = {
         type: 'FeatureCollection',
         features: @points
     }
