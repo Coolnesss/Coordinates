@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   get 'reports/:id/ignore' => 'reports#ignore', :as => 'ignore_report'
   get 'signin', to: 'sessions#new', as: "signin"
   delete 'signout', to: 'sessions#destroy', as: "signout"
+  get 'positions/:id/send' => 'positions#send_to_api', as: 'send_position'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

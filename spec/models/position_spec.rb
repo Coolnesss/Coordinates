@@ -154,9 +154,23 @@ describe Position do
        position = FactoryGirl.create :position
        position.issue_id = "8fmht6g1470b3qk8pthg"
        position.save
-       
+
        expect(Position.first.find_detailed_status).not_to be_nil
        expect(Position.first.find_detailed_status).to eq("RECEIVED")
+  end
+
+  it "won't call IssueReporter if position already has issue id when sending" do
+    allow(IssueReporter).to receive(:find).and_return("great")
+    allow(IssueReporter).to receive(:send).and_return("great")
+    position = FactoryGirl.create :position
+
+    position.issue_id = "123"
+    position.save
+
+    position.send_to_api
+    expect(IssueReporter).not_to have_received(:send)
+    allow(IssueReporter).to receive(:find).and_call_original
+    allow(IssueReporter).to receive(:send).and_call_original
   end
 
 

@@ -2,44 +2,71 @@ require 'rails_helper'
 require 'rack/test'
 
 describe "Position" do
-
   before (:each) do
     @position = FactoryGirl.create :position
-    FactoryGirl.create :user
   end
 
-  it "can vote on a position" do
-    visit vote_position_path(@position)
+  describe "When logged in" do
 
-    expect(Position.first.votes).to eq(1)
+    before (:each) do
+      FactoryGirl.create :user
+      sign_in(username:"Sam", password:"Samisbest")
+    end
+
+    it "can destroy position" do
+      visit positions_path
+
+      click_link('Destroy')
+      expect(Position.count).to eq(0)
+    end
+
+    it "can edit position" do
+      visit positions_path
+
+      click_link('Edit')
+      fill_in('Description', with: "This is the best description")
+
+      click_button('Update Position')
+      expect(Position.first.updated_at).not_to eq(Position.first.created_at)
+      expect(Position.first.description).to eq("This is the best description")
+    end
+
+    it "calls IssueReporter when the send to API button is pressed" do
+      visit positions_path
+      allow(IssueReporter).to receive(:send).and_return("great")
+      click_link('Send to API')
+
+      expect(IssueReporter).to have_received(:send)
+    end
+
+    it "doesnt show send button when position already has issue ID" do
+      allow(IssueReporter).to receive(:find).and_return("great")
+      @position.issue_id = "123"
+      @position.save
+
+      visit positions_path
+      expect(page).not_to have_link("Send to API")
+    end
+
+    after (:each) do
+      allow(IssueReporter).to receive(:find).and_call_original
+      allow(IssueReporter).to receive(:send).and_call_original
+    end
   end
 
-  it "can destroy position with auth" do
-    sign_in(username:"Sam", password:"Samisbest")
-    visit positions_path
+  describe "Without being logged in" do
+    it "can vote on a position" do
+      visit vote_position_path(@position)
 
-    click_link('Destroy')
-    expect(Position.count).to eq(0)
+      expect(Position.first.votes).to eq(1)
+    end
+
+    it "has the correct CSS label when saved with a category" do
+      FactoryGirl.create(:position)
+
+      visit positions_path
+      expect(page).to have_css('span.label')
+      expect(page).to have_css('span.label-default')
+    end
   end
-
-  it "can edit position with auth" do
-    sign_in(username:"Sam", password:"Samisbest")
-    visit positions_path
-
-    click_link('Edit')
-    fill_in('Description', with: "This is the best description")
-
-    click_button('Update Position')
-    expect(Position.first.updated_at).not_to eq(Position.first.created_at)
-    expect(Position.first.description).to eq("This is the best description")
-  end
-
-  it "has the correct CSS label when saved with a category" do
-    FactoryGirl.create(:position)
-
-    visit positions_path
-    expect(page).to have_css('span.label')
-    expect(page).to have_css('span.label-default')
-  end
-
 end

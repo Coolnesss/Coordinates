@@ -43,6 +43,9 @@
         <% if current_user %>
           <td><%= link_to 'Edit', edit_position_path(position), class: "btn btn-warning btn-xs" %></td>
           <td><%= link_to 'Destroy', position, class:"btn btn-danger btn-xs", method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          <% if not position.issue_id.present? %>
+            <td><%= link_to 'Send to API', send_position_path(position), class: "btn btn-warning btn-xs", data: { confirm: 'Are you sure?' } %> </td>
+          <% end %>
         <% end %>
       </tr>
     <% end %>

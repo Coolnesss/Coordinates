@@ -119,10 +119,14 @@ class Position < ActiveRecord::Base
   end
 
   def send_to_api
-    if self.votes > 2 then
-      Thread.new {
-        IssueReporter.send(self.id)
-      }
+    if self.votes > 2 and not self.issue_id.present? then
+      self.send_to_api!
     end
+  end
+
+  def send_to_api!
+    Thread.new {
+      IssueReporter.send(self.id)
+    }
   end
 end

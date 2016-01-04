@@ -1,5 +1,5 @@
 class PositionsController < ApplicationController
-  before_action :set_position, only: [:show, :edit, :update, :destroy, :vote]
+  before_action :set_position, only: [:show, :edit, :update, :destroy, :vote, :send_to_api]
   before_action :ensure_that_signed_in, except: [:index, :new, :create, :vote, :show]
 
   def vote
@@ -11,10 +11,18 @@ class PositionsController < ApplicationController
     end
   end
 
+  def send_to_api
+    @position.send_to_api!
+    respond_to do |format|
+      format.html { redirect_to root_path }
+      format.json { render json: @position }
+    end
+  end
+
   # GET /positions
   # GET /positions.json
   def index
-    @positions = Position.all.order(:name)
+    @positions = Position.all.order :id
     @geojson = Hash.new
 
     @points = Position.geopoints
