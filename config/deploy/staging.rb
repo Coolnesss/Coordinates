@@ -14,13 +14,14 @@ role :db,  %w{ec2-user@ec2-54-93-95-157.eu-central-1.compute.amazonaws.com}
 # This can be used to drop a more detailed server definition into the
 # server list. The second argument is a, or duck-types, Hash and is
 # used to set extended properties on the server.
+set :stage, :staging
 
 server 'ec2-54-93-95-157.eu-central-1.compute.amazonaws.com',
 user: 'ec2-user',
 roles: %w{web app},
 my_property: :my_value
 
-
+set :deploy_to,       "/home/ec2-user/apps/#{fetch(:application)}"
 # Custom SSH Options
 # ==================
 # You may pass any option but keep in mind that net/ssh understands a
