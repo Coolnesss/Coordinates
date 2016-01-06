@@ -67,18 +67,18 @@ describe "Positions API" do
       expect(Position.first.votes).to eq(1)
     end
 
-    it "when voting, if number of votes is over two, calls IssueReporter" do
-      position = FactoryGirl.create :position
-      position.votes = 3
-      position.save
-
-      allow(IssueReporter).to receive(:send).and_return("great")
-      get "/positions/1/vote", {}, { "Accept" => "application/json" }
-
-      expect(Position.first.votes).to eq(4)
-      expect(IssueReporter).to have_received(:send)
-      allow(IssueReporter).to receive(:send).and_call_original
-    end
+    #it "when voting, if number of votes is over two, calls IssueReporter" do
+    #  position = FactoryGirl.create :position
+    #  position.votes = 3
+    #  position.save
+    #
+    #  allow(IssueReporter).to receive(:send).and_return("great")
+    #  get "/positions/1/vote", {}, { "Accept" => "application/json" }
+    #
+    #  expect(Position.first.votes).to eq(4)
+    #  expect(IssueReporter).to have_received(:send)
+    #  allow(IssueReporter).to receive(:send).and_call_original
+    #end
 
     it "contains detailed_status and status for positions in API" do
       stub_request(:get, /.*8fmht6g1470b3qk8pthg.json.*/).

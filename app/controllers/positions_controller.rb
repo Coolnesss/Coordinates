@@ -4,7 +4,7 @@ class PositionsController < ApplicationController
 
   def vote
     @position.increment!(:votes)
-    @position.send_to_api
+    #@position.send_to_api
     respond_to do |format|
       format.html { redirect_to root_path }
       format.json { render json: @position.votes }
