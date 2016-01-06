@@ -13,7 +13,7 @@ class IssueReporter
     resp = RestClient.post(@url+".json", {
       api_key: ENV["HEL_API_KEY"],
       service_code: position.deduce_service_code,
-      description: position.description,
+      description: create_description(position),
       title: position.name,
       lat: position.lat,
       long: position.lon,
@@ -30,15 +30,19 @@ class IssueReporter
     json
   end
 
+  def self.find(id)
+    return nil unless id != nil
+    resp = RestClient.get @url+"/#{id}.json"
+    JSON.parse(resp).first
+  end
+
   def self.update_position(pos_id, json)
     position = Position.find pos_id
     position.issue_id = json["service_request_id"]
     position.save unless position.issue_id == nil
   end
 
-  def self.find(id)
-    return nil unless id != nil
-    resp = RestClient.get @url+"/#{id}.json"
-    JSON.parse(resp).first
+  def self.create_description(position)
+    position.description << "\n tehty fillari.info:n kautta. Piste kartalla: http://fillari.info/#id=#{position.id}"
   end
 end

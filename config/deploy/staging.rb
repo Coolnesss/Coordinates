@@ -4,9 +4,9 @@
 # is considered to be the first unless any hosts have the primary
 # property set.  Don't declare `role :all`, it's a meta role.
 
-role :app, %w{deploy@example.com}
-role :web, %w{deploy@example.com}
-role :db,  %w{deploy@example.com}
+role :app, %w{ec2-user@ec2-54-93-95-157.eu-central-1.compute.amazonaws.com}
+role :web, %w{ec2-user@ec2-54-93-95-157.eu-central-1.compute.amazonaws.com}
+role :db,  %w{ec2-user@ec2-54-93-95-157.eu-central-1.compute.amazonaws.com}
 
 
 # Extended Server Syntax
@@ -14,10 +14,14 @@ role :db,  %w{deploy@example.com}
 # This can be used to drop a more detailed server definition into the
 # server list. The second argument is a, or duck-types, Hash and is
 # used to set extended properties on the server.
+set :stage, :staging
 
-server 'example.com', user: 'deploy', roles: %w{web app}, my_property: :my_value
+server 'ec2-54-93-95-157.eu-central-1.compute.amazonaws.com',
+user: 'ec2-user',
+roles: %w{web app},
+my_property: :my_value
 
-
+set :deploy_to,       "/home/ec2-user/apps/#{fetch(:application)}"
 # Custom SSH Options
 # ==================
 # You may pass any option but keep in mind that net/ssh understands a
@@ -25,11 +29,9 @@ server 'example.com', user: 'deploy', roles: %w{web app}, my_property: :my_value
 #
 # Global options
 # --------------
-#  set :ssh_options, {
-#    keys: %w(/home/rlisowski/.ssh/id_rsa),
-#    forward_agent: false,
-#    auth_methods: %w(password)
-#  }
+  set :ssh_options, {
+    keys: %w(/home/chang/keys/fillari-staging.pem)
+  }
 #
 # And/or per server (overrides global)
 # ------------------------------------
