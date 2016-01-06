@@ -28,3 +28,7 @@ production:
   pool: 5
   username: chang
   password: strong-deploy-key
+
+staging:
+  <<: *default
+  database: db/staging.sqlite3
