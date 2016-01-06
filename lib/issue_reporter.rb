@@ -30,8 +30,6 @@ class IssueReporter
     json
   end
 
-  private
-
   def self.update_position(pos_id, json)
     position = Position.find pos_id
     position.issue_id = json["service_request_id"]
