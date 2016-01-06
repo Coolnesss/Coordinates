@@ -173,5 +173,13 @@ describe Position do
     allow(IssueReporter).to receive(:send).and_call_original
   end
 
+  it "won't call IssueReporter if position has no issue_id when searching for status" do
+    allow(IssueReporter).to receive(:find).and_return("great")
 
+    position = FactoryGirl.create :position
+    position.find_status
+    position.find_detailed_status
+
+    expect(IssueReporter).not_to have_received(:find)
+  end
 end
