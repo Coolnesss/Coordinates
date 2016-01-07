@@ -4,9 +4,9 @@
 # is considered to be the first unless any hosts have the primary
 # property set.  Don't declare `role :all`, it's a meta role.
 
-role :app, %w{ec2-user@ec2-54-93-95-157.eu-central-1.compute.amazonaws.com}
-role :web, %w{ec2-user@ec2-54-93-95-157.eu-central-1.compute.amazonaws.com}
-role :db,  %w{ec2-user@ec2-54-93-95-157.eu-central-1.compute.amazonaws.com}
+role :app, %w{chang@ec2-54-93-95-157.eu-central-1.compute.amazonaws.com}
+role :web, %w{chang@ec2-54-93-95-157.eu-central-1.compute.amazonaws.com}
+role :db,  %w{chang@ec2-54-93-95-157.eu-central-1.compute.amazonaws.com}
 
 
 # Extended Server Syntax
@@ -17,11 +17,11 @@ role :db,  %w{ec2-user@ec2-54-93-95-157.eu-central-1.compute.amazonaws.com}
 set :stage, :staging
 
 server 'ec2-54-93-95-157.eu-central-1.compute.amazonaws.com',
-user: 'ec2-user',
+user: 'chang',
 roles: %w{web app},
 my_property: :my_value
 
-set :deploy_to,       "/home/ec2-user/apps/#{fetch(:application)}"
+set :deploy_to,       "/home/chang/apps/#{fetch(:application)}"
 # Custom SSH Options
 # ==================
 # You may pass any option but keep in mind that net/ssh understands a
