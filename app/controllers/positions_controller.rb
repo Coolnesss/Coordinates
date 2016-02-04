@@ -12,10 +12,14 @@ class PositionsController < ApplicationController
   end
 
   def send_to_api
-    @position.send_to_api!
     respond_to do |format|
-      format.html { redirect_to root_path }
-      format.json { render json: @position }
+      if @position.send_to_api
+        format.html { redirect_to root_path }
+        format.json { render json: @position }
+      else
+        format.html {redirect_to root_path, notice: "Failed to send to API. Maybe position isn't in Helsinki?"}
+        format.json {render json: @position }
+      end
     end
   end
 

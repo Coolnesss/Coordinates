@@ -123,7 +123,7 @@ class Position < ActiveRecord::Base
   end
 
   def send_to_api
-    if self.votes > 2 and not self.issue_id.present? and self.in_helsinki? then
+    if not self.issue_id.present? and self.in_helsinki? then
       self.send_to_api!
     end
   end
