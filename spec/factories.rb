@@ -4,8 +4,8 @@ FactoryGirl.define do
   factory :position do
     name "BestName"
     description "The best place on earth"
-    lon 2774888.97595262
-    lat 8435571.22109427
+    lon 24.91840286970849
+    lat 60.1788711197085
     votes 0
     email "chang@best.fi"
     fb_id 1154034356884883

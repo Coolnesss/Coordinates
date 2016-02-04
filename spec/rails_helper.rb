@@ -13,6 +13,37 @@ def sign_in(credentials)
   click_button('Log in')
 end
 
+pos = FactoryGirl.attributes_for :position
+
+Geocoder.configure(:lookup => :test)
+Geocoder::Lookup::Test.add_stub(
+  [pos[:lat], pos[:lon]], [
+    {
+      'latitude' => pos[:lat],
+      'longitude' => pos[:lon],
+      'address' => 'Fältskärsgatan 13, 00101 Helsingfors, Finland',
+      'city' => 'Helsingfors',
+      'country' => 'Finland',
+      'country_code' => 'FI'
+    }
+  ]
+)
+
+espoo_lon = 24.69422815914966
+espoo_lat = 60.171243441670384
+
+Geocoder::Lookup::Test.add_stub(
+  [espoo_lat, espoo_lon], [
+    {
+      'latitude' => espoo_lat,
+      'longitude' => espoo_lon,
+      'city' => 'Esbo',
+      'country' => 'Finland',
+      'country_code' => 'FI'
+    }
+  ]
+)
+
 # Requires supporting ruby files with custom matchers and macros, etc, in
 # spec/support/ and its subdirectories. Files matching `spec/**/*_spec.rb` are
 # run as spec files by default. This means that files in spec/support that end

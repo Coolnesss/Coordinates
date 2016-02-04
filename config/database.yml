@@ -31,4 +31,4 @@ production:
 
 staging:
   <<: *default
-  database: db/staging.sqlite3
+  database: ../shared/staging.sqlite3

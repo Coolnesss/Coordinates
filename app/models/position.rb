@@ -2,6 +2,10 @@ class Position < ActiveRecord::Base
 
   has_many :reports, dependent: :destroy
   has_many :pictures, dependent: :destroy
+  reverse_geocoded_by :lat, :lon do |obj,geo|
+    geo.first
+  end
+
 
   enum category: {
     huonovayla: "Kunnossapito, Huonokuntoinen väylä",
@@ -119,14 +123,17 @@ class Position < ActiveRecord::Base
   end
 
   def send_to_api
-    if self.votes > 2 and not self.issue_id.present? then
+    if self.votes > 2 and not self.issue_id.present? and self.in_helsinki? then
       self.send_to_api!
     end
   end
 
   def send_to_api!
-    Thread.new {
-      IssueReporter.send(self.id)
-    }
+    Thread.new { IssueReporter.send(self.id) }
+  end
+
+  def in_helsinki?
+    geocode = self.reverse_geocode
+    geocode.present? and (geocode.city == "Helsingfors" or geocode.city == "Helsinki")
   end
 end

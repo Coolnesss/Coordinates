@@ -3,6 +3,12 @@ require 'webmock/rspec'
 include ActionDispatch::TestProcess
 
 describe Position do
+
+  after (:each) do
+    allow(IssueReporter).to receive(:find).and_call_original
+    allow(IssueReporter).to receive(:send).and_call_original
+  end
+
   it "can save a position with name and description" do
     position = FactoryGirl.create(:position)
 
@@ -169,8 +175,6 @@ describe Position do
 
     position.send_to_api
     expect(IssueReporter).not_to have_received(:send)
-    allow(IssueReporter).to receive(:find).and_call_original
-    allow(IssueReporter).to receive(:send).and_call_original
   end
 
   it "won't call IssueReporter if position has no issue_id when searching for status" do
@@ -181,5 +185,25 @@ describe Position do
     position.find_detailed_status
 
     expect(IssueReporter).not_to have_received(:find)
+  end
+
+  it "in_helsinki? returns true for a position in Helsinki" do
+    pos = FactoryGirl.create :position
+    expect pos.in_helsinki?
+  end
+
+  it "IssueReporter is not called if position is not in Helsinki" do
+    espoo_lon = 24.69422815914966
+    espoo_lat = 60.171243441670384
+    allow(IssueReporter).to receive(:send).and_return("great")
+
+    pos = FactoryGirl.create :position
+    pos.lon = espoo_lon
+    pos.lat = espoo_lat
+    pos.save
+
+    expect(pos.in_helsinki?).to be false
+    pos.send_to_api
+    expect(IssueReporter).not_to have_received(:send)
   end
 end
