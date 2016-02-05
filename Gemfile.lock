@@ -217,6 +217,10 @@ GEM
     rest-client-components (1.4.0)
       rack (>= 1.0.1)
       rest-client (>= 1.6.0)
+    rspec (3.4.0)
+      rspec-core (~> 3.4.0)
+      rspec-expectations (~> 3.4.0)
+      rspec-mocks (~> 3.4.0)
     rspec-core (3.4.2)
       rspec-support (~> 3.4.0)
     rspec-expectations (3.4.0)
@@ -237,6 +241,8 @@ GEM
       rspec-mocks (~> 3.4.0)
       rspec-support (~> 3.4.0)
     rspec-support (3.4.1)
+    rspec-wait (0.0.8)
+      rspec (>= 2.11, < 3.5)
     rubyzip (1.1.7)
     rufus-scheduler (3.2.0)
     safe_yaml (1.0.4)
@@ -338,6 +344,7 @@ DEPENDENCIES
   rest-client-components
   rspec-its
   rspec-rails (~> 3.0)
+  rspec-wait
   rufus-scheduler
   sass-rails (~> 5.0)
   sdoc (~> 0.4.0)

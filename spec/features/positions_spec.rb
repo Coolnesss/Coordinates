@@ -36,7 +36,7 @@ describe "Position" do
       allow(IssueReporter).to receive(:send).and_return("great")
       click_link('Send to API')
 
-      expect(IssueReporter).to have_received(:send)
+      wait_for(IssueReporter).to have_received(:send)
     end
 
     it "shows error for position not in Helsinki when the Send button is pressed" do
@@ -46,7 +46,7 @@ describe "Position" do
       @position.lat = espoo_lat
       @position.lon = espoo_lon
       @position.save
-      
+
       visit positions_path
       click_link('Send to API')
 
