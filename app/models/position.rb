@@ -113,13 +113,13 @@ class Position < ActiveRecord::Base
   end
 
   def find_status()
-    resp = IssueReporter.find self.issue_id unless not issue_id.present?
-    resp["status"] unless not resp or not resp["status"].present?
+    resp = IssueReporter.find(self.issue_id) if issue_id.present?
+    resp["status"] if resp.present?
   end
 
   def find_detailed_status()
-    resp = IssueReporter.find self.issue_id unless not issue_id.present?
-    resp["extended_attributes"]["detailed_status"] unless not resp or not resp["extended_attributes"].present?
+    resp = IssueReporter.find(self.issue_id) if issue_id.present?
+    resp["extended_attributes"]["detailed_status"] if resp and resp["extended_attributes"].present?
   end
 
   def send_to_api
