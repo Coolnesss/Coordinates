@@ -1,0 +1,85 @@
+= rest-client-components
+
+RestClient on steroids ! 
+
+Want to add transparent HTTP caching to the rest-client[http://github.com/archiloque/rest-client] gem ? It's as simple as:
+  require 'restclient/components'
+  require 'rack/cache'
+  RestClient.enable Rack::Cache
+  RestClient.get "http://some/cacheable/resource"
+
+Want to log the requests in the commonlog format ?
+  require 'restclient/components'
+  RestClient.enable Rack::CommonLogger, STDOUT
+  RestClient.get "http://some/resource"
+
+Want to enable both ?
+  require 'restclient/components'
+  require 'rack/cache'
+  RestClient.enable Rack::CommonLogger, STDOUT
+  RestClient.enable Rack::Cache
+  RestClient.get "http://some/cacheable/resource"
+  
+This works with any Rack middleware, thus you can reuse the wide range of existing Rack middleware to add functionalities to RestClient with very little effort.
+The order in which you enable components will be respected.
+
+Note that the rest-client behaviour is also respected: you'll get back a RestClient::Response or RestClient exceptions as a result of your requests. If you prefer a more rack-esque approach, just disable the Compatibility component, and you will get back a response conform to the Rack SPEC:
+  require 'restclient/components'
+  RestClient.disable RestClient::Rack::Compatibility
+  status, header, body = RestClient.get('http://some/url')
+In that case, you will only get exceptions for connection or timeout errors (RestClient::ServerBrokeConnection or RestClient::RequestTimeout)
+
+See the examples folder for more details.
+
+= Installation
+
+  gem install rest-client-components
+  gem install rack-cache # if you want to use Rack::Cache
+  
+= Usage
+Example with Rack::Cache, and Rack::CommonLogger
+
+  require 'restclient/components'
+  require 'rack/cache'
+  
+  RestClient.enable Rack::CommonLogger
+  # Enable the cache Rack middleware, and store both meta and entity data in files:
+  # See http://rtomayko.github.io/rack-cache/configuration for the list of available options
+  RestClient.enable Rack::Cache, 
+                    :metastore => 'file:/tmp/cache/meta', 
+                    :entitystore => 'file:/tmp/cache/body'
+
+  
+  # ... done !
+  # Then you can make your requests as usual: 
+  # You'll get a log for each call, and the resources will be automatically and transparently cached for you according to their HTTP headers.
+  # Cache invalidation on requests other than GET is also transparently supported, thanks to Rack::Cache. Enjoy !
+
+  RestClient.get 'http://some/cacheable/resource'
+  # or
+  resource = RestClient::Resource.new('http://some/cacheable/resource')
+  
+  # obviously, caching is only interesting if you request the same resource multiple times, e.g. :
+  resource.get # get from origin server, and cache if possible
+  resource.get # get from cache, if still fresh.
+  resource.put(...) # will automatically invalidate the cache, so that a subsequent GET request on the same resource does not return the cached resource
+  resource.get # get from origin server, and cache if possible
+  # ...
+  resource.get(:cache_control => 'no-cache') # explicitly tells to bypass the cache, requires rack-cache >= 0.5 and :allow_reload => true option
+  # ...
+  resource.delete(...) # will invalidate the cache
+  resource.get # should raise a RestClient::ResourceNotFound exception
+
+
+Now, you just need to make your resources cacheable, so unless you've already taken care of that, do yourself a favor and read: 
+* the HTTP specification related to HTTP caching - http://www.w3.org/Protocols/rfc2616/rfc2616-sec13.html
+* Things Caches Do - http://tomayko.com/writings/things-caches-do
+
+= Dependencies
+
+* rest-client >= 1.4.1
+* rack >= 1.0.1
+
+= COPYRIGHT
+
+Copyright (c) 2009-2010 Cyril Rohr. See LICENSE for details.

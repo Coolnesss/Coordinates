@@ -14,7 +14,7 @@ class PositionsController < ApplicationController
   def send_to_api
     respond_to do |format|
       if @position.send_to_api
-        format.html { redirect_to root_path }
+        format.html { redirect_to root_path, notice: "Queued sending to API. This should be done soon." }
         format.json { render json: @position }
       else
         format.html {redirect_to root_path, notice: "Failed to send to API. Maybe position isn't in Helsinki?"}

@@ -1,0 +1,12 @@
+/home/chang/.rbenv/versions/2.2.0/bin/ruby -r ./siteconf20160211-7070-gst58e.rb extconf.rb 
+checking for main() in -lstdc++... yes
+creating Makefile
+
+make "DESTDIR=" clean
+
+make "DESTDIR="
+compiling unf.cc
+linking shared-object unf_ext.so
+
+make "DESTDIR=" install
+/usr/bin/install -c -m 0755 unf_ext.so ./.gem.20160211-7070-z0fh8t

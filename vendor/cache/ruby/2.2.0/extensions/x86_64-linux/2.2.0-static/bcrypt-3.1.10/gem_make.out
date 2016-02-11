@@ -1,0 +1,15 @@
+/home/chang/.rbenv/versions/2.2.0/bin/ruby -r ./siteconf20160211-7070-1f4i4q0.rb extconf.rb 
+creating Makefile
+
+make "DESTDIR=" clean
+
+make "DESTDIR="
+compiling wrapper.c
+compiling bcrypt_ext.c
+compiling crypt_gensalt.c
+compiling crypt_blowfish.c
+compiling crypt.c
+linking shared-object bcrypt_ext.so
+
+make "DESTDIR=" install
+/usr/bin/install -c -m 0755 bcrypt_ext.so ./.gem.20160211-7070-tr6kul

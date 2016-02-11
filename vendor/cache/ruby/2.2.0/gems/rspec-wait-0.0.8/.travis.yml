@@ -1,0 +1,33 @@
+before_install:
+  - gem update bundler rake
+branches:
+  only:
+    - master
+cache: bundler
+env:
+  global:
+    - secure: | # CODECLIMATE_REPO_TOKEN
+        lK3tYDk/63jRamEfGKbC27mPAoV7XsebCurx6doeisv1r4926lyPY4B9ZoSu
+        OeVmjXQWHX9U7IgPH1C+zoIh1wVHVA8h5FVuqlGUMlA6IJi2xaI+ChEo3WeD
+        FRlk1Q5fGhgp1mt59sMn3GZZ/mv31v+sd9iYC3AVIM0KrlMGGZQ=
+gemfile:
+  - gemfiles/rspec_2_11.gemfile
+  - gemfiles/rspec_2_12.gemfile
+  - gemfiles/rspec_2_13.gemfile
+  - gemfiles/rspec_2_14.gemfile
+  - gemfiles/rspec_3_0.gemfile
+  - gemfiles/rspec_3_1.gemfile
+  - gemfiles/rspec_3_2.gemfile
+  - gemfiles/rspec_3_3.gemfile
+  - gemfiles/rspec_3_4.gemfile
+language: ruby
+matrix:
+  allow_failures:
+    - rvm: ruby-head
+rvm:
+  - 1.9.3
+  - "2.0"
+  - "2.1"
+  - "2.2"
+  - ruby-head
+sudo: false
