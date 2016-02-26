@@ -33,7 +33,6 @@ gem 'email_validator'
 gem 'bcrypt'
 gem "font-awesome-rails"
 gem 'rest-client'
-gem 'rufus-scheduler'
 
 gem 'rack-jsonp-middleware',
   :require => 'rack/jsonp'
@@ -55,8 +54,6 @@ group :production do
   gem 'rack-attack'
 end
 gem 'sqlite3'
-gem 'rest-client-components'
-gem 'rack-cache' 
 gem 'geocoder'
 
 group :development, :test do

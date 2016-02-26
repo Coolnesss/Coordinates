@@ -3,8 +3,8 @@ require 'rest-client'
 class IssueReporter
   @url = ENV["HEL_URL"]+"requests"
 
-  def self.get_all
-    JSON.parse(RestClient.get @url)
+  def self.all
+    Rails.cache.fetch("issues", expires_in: 1.day) { self.fetch_all }
   end
 
   def self.send(pos_id)
@@ -31,7 +31,7 @@ class IssueReporter
   end
 
   def self.find(id)
-    return nil unless id != nil
+    return nil unless id
     resp = RestClient.get @url+"/#{id}.json"
     JSON.parse(resp).first
   end
@@ -40,6 +40,14 @@ class IssueReporter
     position = Position.find pos_id
     position.issue_id = json["service_request_id"]
     position.save unless position.issue_id == nil
+  end
+
+  private
+
+  def self.fetch_all
+    JSON.parse(RestClient.get(@url+".json", {
+      params: {extensions: true}
+    }))
   end
 
   def self.create_description(position)

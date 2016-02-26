@@ -69,8 +69,8 @@ class Position < ActiveRecord::Base
           images: position.picture_urls,
           category: position[:category],
           updates: position.updates,
-          status: position.find_status, #TODO
-          detailed_status: position.find_detailed_status, #TODO
+          status: position.find_status,
+          detailed_status: position.find_detailed_status,
           issue_id: position.issue_id
         }
       }
@@ -113,13 +113,19 @@ class Position < ActiveRecord::Base
   end
 
   def find_status()
-    resp = IssueReporter.find(self.issue_id) if issue_id.present?
-    resp["status"] if resp.present?
+    issue = find_issue_report
+    issue["status"] if issue
   end
 
   def find_detailed_status()
-    resp = IssueReporter.find(self.issue_id) if issue_id.present?
-    resp["extended_attributes"]["detailed_status"] if resp and resp["extended_attributes"].present?
+    issue = find_issue_report
+    issue["extended_attributes"]["detailed_status"] if issue and issue["extended_attributes"]
+  end
+
+  def find_issue_report
+    return nil if not self.issue_id
+    resp = IssueReporter.all
+    resp.find{|x| x["service_request_id"] == self.issue_id}
   end
 
   def send_to_api

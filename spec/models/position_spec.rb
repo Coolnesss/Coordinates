@@ -141,12 +141,13 @@ describe Position do
   end
 
   it "finds the status from the API" do
-    stub_request(:get, /.*8fmht6g1470b3qk8pthg.json.*/).
-         to_return(:status => 200, :body => IO.read("spec/fixtures/request.json"), :headers => {})
+    allResponse = IO.read("spec/fixtures/requests.json")
 
+    stub_request(:get, /.*requests.json/).
+            to_return(:status => 200, :body => allResponse, :headers => {})
 
     position = FactoryGirl.create :position
-    position.issue_id = "8fmht6g1470b3qk8pthg"
+    position.issue_id = "65ad2ae4256d1e2808ea3680117b63358be68053"
     position.save
     expect(Position.first.find_status).not_to be_nil
     expect(Position.first.find_status).to eq("open")
@@ -154,11 +155,13 @@ describe Position do
   end
 
   it "finds the detailed status from the API" do
-    stub_request(:get, /.*8fmht6g1470b3qk8pthg.json.*/).
-         to_return(:status => 200, :body => IO.read("spec/fixtures/request.json"), :headers => {})
+    allResponse = IO.read("spec/fixtures/requests.json")
+
+    stub_request(:get, /.*requests.json/).
+            to_return(:status => 200, :body => allResponse, :headers => {})
 
        position = FactoryGirl.create :position
-       position.issue_id = "8fmht6g1470b3qk8pthg"
+       position.issue_id = "65ad2ae4256d1e2808ea3680117b63358be68053"
        position.save
 
        expect(Position.first.find_detailed_status).not_to be_nil

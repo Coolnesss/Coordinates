@@ -81,11 +81,11 @@ describe "Positions API" do
     #end
 
     it "contains detailed_status and status for positions in API" do
-      stub_request(:get, /.*8fmht6g1470b3qk8pthg.json.*/).
-           to_return(:status => 200, :body => IO.read("spec/fixtures/request.json"), :headers => {})
+      stub_request(:get, /.*requests.json/).
+              to_return(:status => 200, :body => IO.read("spec/fixtures/requests.json"), :headers => {})
 
       position = FactoryGirl.create :position
-      position.issue_id = "8fmht6g1470b3qk8pthg"
+      position.issue_id = "65ad2ae4256d1e2808ea3680117b63358be68053"
       position.save
 
       get "/positions", {}, { "Accept" => "application/json" }
