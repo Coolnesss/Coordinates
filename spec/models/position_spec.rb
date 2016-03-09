@@ -209,4 +209,15 @@ describe Position do
     pos.send_to_api
     expect(IssueReporter).not_to have_received(:send)
   end
+
+  it "clears rails cache when sending to API" do
+    allow(IssueReporter).to receive(:send).and_return("great")
+    Rails.cache.write "issues", "best"
+    expect(Rails.cache.read("issues")).to eq("best")
+    
+    position = FactoryGirl.create :position
+    position.send_to_api
+
+    wait_for(Rails.cache.read("issues")).to be_nil
+  end
 end

@@ -135,7 +135,10 @@ class Position < ActiveRecord::Base
   end
 
   def send_to_api!
-    Thread.new { IssueReporter.send(self.id) }
+    Thread.new {
+      IssueReporter.send(self.id)
+      Rails.cache.delete("issues")
+     }
   end
 
   def in_helsinki?
