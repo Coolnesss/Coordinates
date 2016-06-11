@@ -140,32 +140,30 @@ describe Position do
     expect(code).to eq 171
   end
 
-  it "finds the status from the API" do
-    allResponse = IO.read("spec/fixtures/requests.json")
+  describe "from API" do
 
-    stub_request(:get, /.*requests.json/).
-            to_return(:status => 200, :body => allResponse, :headers => {})
+    before :each do
+      allResponse = IO.read("spec/fixtures/requests.json")
 
-    position = FactoryGirl.create :position
-    position.issue_id = "65ad2ae4256d1e2808ea3680117b63358be68053"
-    position.save
-    expect(Position.first.find_status).not_to be_nil
-    expect(Position.first.find_status).to eq("open")
+      stub_request(:get, /.*requests.json/).
+              to_return(:status => 200, :body => allResponse, :headers => {})
 
-  end
+      position = FactoryGirl.create :position
+      position.issue_id = "65ad2ae4256d1e2808ea3680117b63358be68053"
+      position.save
+    end
 
-  it "finds the detailed status from the API" do
-    allResponse = IO.read("spec/fixtures/requests.json")
+    it "finds the status" do
+      expect(Position.first.find_status).to eq("open")
+    end
 
-    stub_request(:get, /.*requests.json/).
-            to_return(:status => 200, :body => allResponse, :headers => {})
-
-       position = FactoryGirl.create :position
-       position.issue_id = "65ad2ae4256d1e2808ea3680117b63358be68053"
-       position.save
-
-       expect(Position.first.find_detailed_status).not_to be_nil
+    it "finds the detailed status" do
        expect(Position.first.find_detailed_status).to eq("RECEIVED")
+    end
+
+    it "finds the status_notes" do
+      expect(Position.first.find_status_notes).to eq("Palaute vastaanotettu")
+    end
   end
 
   it "won't call IssueReporter if position already has issue id when sending" do
@@ -214,7 +212,7 @@ describe Position do
     allow(IssueReporter).to receive(:send).and_return("great")
     Rails.cache.write "issues", "best"
     expect(Rails.cache.read("issues")).to eq("best")
-    
+
     position = FactoryGirl.create :position
     position.send_to_api
 

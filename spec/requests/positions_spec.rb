@@ -80,23 +80,33 @@ describe "Positions API" do
     #  allow(IssueReporter).to receive(:send).and_call_original
     #end
 
-    it "contains detailed_status and status for positions in API" do
-      stub_request(:get, /.*requests.json/).
-              to_return(:status => 200, :body => IO.read("spec/fixtures/requests.json"), :headers => {})
+    describe "with positions in API" do
+      before :each do
+        stub_request(:get, /.*requests.json/).
+                to_return(:status => 200, :body => IO.read("spec/fixtures/requests.json"), :headers => {})
 
-      position = FactoryGirl.create :position
-      position.issue_id = "65ad2ae4256d1e2808ea3680117b63358be68053"
-      position.save
+        position = FactoryGirl.create :position
+        position.issue_id = "65ad2ae4256d1e2808ea3680117b63358be68053"
+        position.save
+      end
 
-      get "/positions", {}, { "Accept" => "application/json" }
+      it "contains status and detailed_status" do
+        get "/positions", {}, { "Accept" => "application/json" }
+        contents = JSON.parse!(body)["features"].first["properties"]
+        expect(contents).to include("status")
+        expect(contents).to include("detailed_status")
 
-      contents = JSON.parse!(body)["features"].first["properties"]
+        expect(contents["status"]).to eq("open")
+        expect(contents["detailed_status"]).to eq("RECEIVED")
+      end
 
-      expect(contents).to include("status")
-      expect(contents).to include("detailed_status")
+      it "contains status_notes" do
+        get "/positions", {}, { "Accept" => "application/json" }
+        contents = JSON.parse!(body)["features"].first["properties"]
 
-      expect(contents["status"]).to eq("open")
-      expect(contents["detailed_status"]).to eq("RECEIVED")
+        expect(contents).to include("status_notes")
+        expect(contents).to have_value("Palaute vastaanotettu")
+      end
     end
 
     it "doesn't contain fb_id or email" do

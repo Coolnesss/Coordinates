@@ -71,6 +71,7 @@ class Position < ActiveRecord::Base
           updates: position.updates,
           status: position.find_status,
           detailed_status: position.find_detailed_status,
+          status_notes: position.find_status_notes,
           issue_id: position.issue_id
         }
       }
@@ -112,14 +113,19 @@ class Position < ActiveRecord::Base
     end
   end
 
-  def find_status()
+  def find_status
     issue = find_issue_report
     issue["status"] if issue
   end
 
-  def find_detailed_status()
+  def find_detailed_status
     issue = find_issue_report
     issue["extended_attributes"]["detailed_status"] if issue and issue["extended_attributes"]
+  end
+
+  def find_status_notes
+    issue = find_issue_report
+    issue["status_notes"] if issue
   end
 
   def find_issue_report
