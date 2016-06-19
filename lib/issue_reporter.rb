@@ -4,7 +4,7 @@ class IssueReporter
   @url = ENV["HEL_URL"]+"requests"
 
   def self.all
-    Rails.cache.fetch("issues", expires_in: 1.day) { self.fetch_all }
+    Rails.cache.fetch("issues") { self.fetch_all }
   end
 
   def self.send(pos_id)
