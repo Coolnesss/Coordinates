@@ -1,0 +1,14 @@
+language: ruby
+rvm:
+  - 2.3.0
+  - 2.2
+  - 2.1
+  - 2.0
+  - rbx-2
+script: bundle exec rake spec rubocop
+install: bundle install --jobs=1
+cache: bundler
+branches:
+  except:
+    - legacy-v2
+sudo: false
